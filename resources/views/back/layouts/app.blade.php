@@ -42,15 +42,15 @@
 
 
     <!--- Select2 css --->
-    <link href="{{ url('back') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <link href="{{ asset('back') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
 
     <!-- Data table css -->
-    <link href="{{ url('back') }}/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="{{ url('back') }}/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet">
-    <link href="{{ url('back') }}/assets/plugins/datatable/css/responsive.bootstrap4.min.css" rel="stylesheet" />
-    <link href="{{ url('back') }}/assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="{{ url('back') }}/assets/plugins/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
-    <link href="{{ url('back') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
+    <link href="{{ asset('back') }}/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="{{ asset('back') }}/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet">
+    <link href="{{ asset('back') }}/assets/plugins/datatable/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+    <link href="{{ asset('back') }}/assets/plugins/datatable/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="{{ asset('back') }}/assets/plugins/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="{{ asset('back') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
 
     {{-- alertify --}}
     <link href="{{ asset('back/assets/css-rtl/alertify.rtl.min.css') }}" type="text/css" rel="stylesheet"/>
@@ -326,32 +326,32 @@
     {{-- <script src="{{ asset('back') }}/assets/js/jquery.vmap.sampledata.js"></script> --}}
     
     <!--Internal  Datepicker js -->
-    <script src="{{ url('back') }}/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
 
     <!-- Internal Select2 js-->
-    <script src="{{ url('back') }}/assets/plugins/select2/js/select2.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/select2/js/select2.min.js"></script>
 
     <!-- Internal Modal js-->
-    <script src="{{ url('back') }}/assets/js/modal.js"></script>
+    <script src="{{ asset('back') }}/assets/js/modal.js"></script>
 
     <!-- Data tables -->
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/dataTables.dataTables.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/dataTables.responsive.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/responsive.dataTables.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/jquery.dataTables.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/dataTables.bootstrap4.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/buttons.bootstrap4.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/jszip.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/pdfmake.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/vfs_fonts.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/buttons.html5.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/buttons.print.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/dataTables.responsive.min.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>
-    <script src="{{ url('back') }}/assets/js/table-data.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/dataTables.dataTables.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/responsive.dataTables.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/jquery.dataTables.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/dataTables.bootstrap4.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/dataTables.buttons.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/buttons.bootstrap4.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/jszip.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/pdfmake.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/vfs_fonts.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/buttons.html5.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/buttons.print.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/buttons.colVis.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/datatable/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('back') }}/assets/js/table-data.js"></script>
 
     <!-- alertify -->
     <script src="{{ asset('back/assets/js/alertify.min.js') }}"></script>
