@@ -97,7 +97,9 @@ class CrmColumnsNamesController extends Controller
 
     public function datatable()
     {
-        $all = CrmColumnsNames::leftJoin('crm_categories', 'crm_categories.id', 'crm_columns_names.category')
+        $all = CrmColumnsNames::orderBy('category', 'asc')
+                                ->orderBy('order', 'asc')
+                                ->leftJoin('crm_categories', 'crm_categories.id', 'crm_columns_names.category')
                                 ->select('crm_columns_names.*', 'crm_categories.name as categ_name')
                                 ->get();
 

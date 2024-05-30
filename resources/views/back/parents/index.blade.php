@@ -1,4 +1,3 @@
-
 @extends('back.layouts.app')
 
 @section('title')
@@ -11,8 +10,28 @@
             padding: 10px;
             border: 1px dotted #9d9d9d;
             border-radius: 4px;
-            width: 35%;
+            width: 30%;
             margin: 30px auto;
+            box-shadow: 10px 7px 23px -8px rgb(151 156 209);
+        }
+
+        .categName{
+            border: 1px dotted;
+            width: 35%;
+            padding: 10px;
+            margin: 10px auto 20px;
+            box-shadow: 7px 7px 5px 0px rgb(182 182 182 / 75%);
+            font-weight: bold;text-align: center;
+            background: linear-gradient(135deg, hsla(0, 0%, 69%, 1) 0%, hsla(227, 50%, 47%, 1) 51%);
+            color: #FFF !important;
+
+        }
+        @media (min-width: 1200px) {
+            .modal-xl {
+                max-width: 95%;
+            }
+        }
+        textarea{
             box-shadow: 10px 7px 23px -8px rgb(151 156 209);
         }
     </style>

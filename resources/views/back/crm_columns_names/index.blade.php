@@ -125,11 +125,11 @@
                             <table class="table table-bordered table-striped table-hover text-center text-md-nowrap" id="example1">
                                 <thead>
                                     <tr>
-                                        <th class="wd-15p border-bottom-0" style="width: 35%;">القسم</th>
-                                        <th class="wd-25p border-bottom-0">ترتيب العنصر حسب المجموعة</th>
-                                        <th class="wd-25p border-bottom-0">الإسم بالعربية</th>
-                                        <th class="wd-25p border-bottom-0">الحالة</th>
-                                        <th class="wd-25p border-bottom-0">التحكم</th>
+                                        <th class="border-bottom-0" style="width: 25%;">القسم</th>
+                                        <th class="border-bottom-0" style="width: 25%;">ترتيب العنصر حسب المجموعة</th>
+                                        <th class="border-bottom-0" style="width: 25%;">الإسم بالعربية</th>
+                                        <th class="border-bottom-0">الحالة</th>
+                                        <th class="border-bottom-0">التحكم</th>
                                     </tr>
                                 </thead>                                
                             </table>

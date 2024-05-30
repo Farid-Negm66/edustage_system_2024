@@ -23,7 +23,10 @@ class ParentController extends Controller
     {
         $pageNameAr = 'أولياء الأمور';
         $pageNameEn = 'parents';
-        $crm_categories = CrmCategories::all();  
+        $crmCategories = CrmCategories::all();  
+        $crmNamesEmpty = CrmColumnsNames::orderBy('category', 'asc')
+                                        ->orderBy('order', 'asc')
+                                        ->get();
 
         // $crmColumnsNames = CrmColumnsNames::leftJoin('crm_categories', 'crm_categories.id', 'crm_columns_names.category')
         //                                     ->select(
@@ -38,13 +41,52 @@ class ParentController extends Controller
         //                                     )
         //                                     ->get();
 
-        // dd($crmColumnsNames);
 
 
-
-        return view('back.parents.index' , compact('pageNameAr' , 'pageNameEn', 'crm_categories'));
+        return view('back.parents.index' , compact('pageNameAr' , 'pageNameEn', 'crmCategories', 'crmNamesEmpty'));
     }
 
+
+
+    public function crm_info($id)
+    {
+        if (request()->ajax()){
+            $parent = Parents::where('ID', $id)->first();
+            $crmNames = CrmColumnsNames::orderBy('category', 'asc')
+                                        ->orderBy('order', 'asc')
+                                        ->leftJoin('crm_columns_values', 'crm_columns_values.column_id', 'crm_columns_names.id')
+                                        ->where('crm_columns_values.parent_id', $id)
+                                        ->select(
+                                            'crm_columns_names.id as crmColumnNameId', 
+                                            'crm_columns_names.name_ar as crmColumnName', 
+                                            'crm_columns_names.category as crmColumnNameCategory', 
+                                            'crm_columns_names.order as crmColumnNameOrder', 
+
+                                            'crm_columns_values.column_id as crmColumnValuesId', 
+                                            'crm_columns_values.value as crmColumnValuesValue', 
+                                            'crm_columns_values.parent_id as crmColumnValuesParentID', 
+                                        )
+                                        ->get();
+
+            $crmNamesEmpty = CrmColumnsNames::orderBy('category', 'asc')
+                                            ->orderBy('order', 'asc')
+                                            ->get();
+                                                        
+                                            // dd($crmNames);
+                            
+            // $crmCategories = CrmCategories::all();  
+
+        
+
+            return response()->json([
+                'parent' => $parent,
+                'crmNames' => $crmNames,
+                'crmNamesEmpty' => $crmNamesEmpty,
+                // 'crmCategories' => $crmCategories,
+            ]);
+        }
+        return response()->json(['failed' => 'Access Denied']);
+    }
 
     public function crm_info_update(Request $request, $id)
     {
@@ -81,49 +123,6 @@ class ParentController extends Controller
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    public function crm_info($id)
-    {
-        if (request()->ajax()){
-            $parent = Parents::where('ID', $id)->first();
-            $crmNames = CrmColumnsNames::leftJoin('crm_columns_values', 'crm_columns_values.column_id', 'crm_columns_names.id')
-                                        ->where('crm_columns_values.parent_id', $id)
-                                        ->select(
-                                            'crm_columns_names.id as crmColumnNameId', 
-                                            'crm_columns_names.name_ar as crmColumnName', 
-
-                                            'crm_columns_values.column_id as crmColumnValuesId', 
-                                            'crm_columns_values.value as crmColumnValuesValue', 
-                                            'crm_columns_values.parent_id as crmColumnValuesParentID', 
-                                        )
-                                        ->get();
-
-        $crmNamesEmpty = CrmColumnsNames::all();
-                                                        
-                                            // dd($crmNames);
-
-
-
-
-            return response()->json([
-                'parent' => $parent,
-                'crmNames' => $crmNames,
-                'crmNamesEmpty' => $crmNamesEmpty,
-            ]);
-        }
-        return response()->json(['failed' => 'Access Denied']);
-    }
 
 
     public function update(Request $request, $id)
@@ -285,7 +284,11 @@ class ParentController extends Controller
         
         $crmCategoriesDetails = DB::table('crm_categories')->get();
 
-        $crmColumnsNamesDetails = DB::table('crm_columns_names')->where('status', 1)->get();
+        $crmColumnsNamesDetails = DB::table('crm_columns_names')
+                                    ->orderBy('category', 'asc')
+                                    ->orderBy('order', 'asc')
+                                    ->where('status', 1)
+                                    ->get();
 
         $crmColumnsValues = DB::table('crm_columns_values')->where('parent_id', $parentDetails->ID)
                             ->leftJoin('crm_columns_names', 'crm_columns_names.id', 'crm_columns_values.column_id')

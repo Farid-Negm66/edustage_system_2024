@@ -4,18 +4,35 @@
         const parent_id = $(this).attr("parent_id");
        
         document.querySelector(".modal #parent_id").value = '';
-        // $(".modal form .row").empty();
-        $(".dataInput").text('');
+        $(".modal form .row").empty();
 
 
         $.ajax({
             url: `{{ url($pageNameEn) }}/crm_info/${parent_id}`,
             type: 'GET',
             dataType: 'json',
+            beforeSend: function(){
+                $(".dataInput").val('');
+            },
             success: function(res){
-                res.crmNames.forEach(crmName => {
-                    $(`.modal #col${crmName.crmColumnNameId}`).text(crmName.crmColumnValuesValue);
+                // console.log(res.crmNames);
+
+                res.crmNamesEmpty.forEach(crmNameEmpty => {
+                    $(`.modal .row`).append(`
+                        <div class="col-md-6">
+                            <label for="${crmNameEmpty.name_ar}">${crmNameEmpty.name_ar}</label>
+                            <div>
+                                <textarea class="form-control dataInput" name="columnValue[]" id="col${crmNameEmpty.id}" style="border-radius: 10px;" rows="3"></textarea>
+                            </div>
+                        </div>
+                    `);
                 })
+
+
+                res.crmNames.forEach(crmName => {
+                    $(`.modal .row #col${crmName.crmColumnNameId}`).text(crmName.crmColumnValuesValue);
+                })
+
 
                 document.querySelector(".modal-title").innerText = `CRM ( ${res.parent.TheName0} )`;
                 document.querySelector(".modal #parent_id").value = res.parent.ID;
