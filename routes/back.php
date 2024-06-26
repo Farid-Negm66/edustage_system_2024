@@ -74,18 +74,21 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Back'], func
         });
     });
 
-    // units Routes
-    Route::group(['prefix' => 'units'] , function (){
-        Route::get('/' , 'UnitsController@index');
-        Route::post('/store' , 'UnitsController@store');
-        Route::post('/store' , 'UnitsController@store');
-        Route::get('/edit/{id}' , 'UnitsController@edit');
-        Route::post('/update/{id}' , 'UnitsController@update');
-        Route::get('/destroy/{id}' , 'UnitsController@destroy');
-        
-        Route::get('datatable' , 'UnitsController@datatable');
-    });
 
+    // time_table Routes
+    Route::group(['prefix' => 'time_table'] , function (){
+        Route::get('/' , 'TimeTableController@index');
+        Route::get('/crm_info/{id}' , 'TimeTableController@crm_info');
+        Route::post('/crm_info_update/{id}' , 'TimeTableController@crm_info_update');
+        Route::get('/destroy/{id}' , 'TimeTableController@destroy');
+        
+        Route::get('datatable' , 'TimeTableController@datatable');
+
+
+        Route::group(['prefix' => 'report'], function(){
+            Route::get('/crm_pdf/{id}', 'ParentController@crm_pdf');                
+        });
+    });
 
 
 
