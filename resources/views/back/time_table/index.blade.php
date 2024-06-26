@@ -60,7 +60,7 @@
         $('.modal').on('hidden.bs.modal', function(){
             $('form [id^=errors]').text('');
             $(this).find("input").not("[name='_token']").val('');
-            document.querySelector("#image_preview_form").src = `{{ url('back/images/users/df_image.png') }}`;
+            document.querySelector("#image_preview_form").src = `{{ url('back/images/time_table/df_image.png') }}`;
         });
         
         
@@ -100,10 +100,69 @@
 
 
 
+    <script>
+        $(document).ready(function(){
+            $(document).on('click', '.add-row', function(e){
+                e.preventDefault();
+                var newRow = `<tr>
+                                <td><input type="date" class="form-control" placeholder="اليوم"></td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="1">أساسية</option>
+                                        <option value="0">تعوضية</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select class="form-control timeSelect"></select>
+                                </td>
+                                <td><input type="time" class="form-control"></td>
+                                <td><input type="time" class="form-control"></td>
+                                <td>
+                                    <select class="form-control">
+                                        <option value="1">غرفه 1</option>
+                                        <option value="0">غرفة 2</option>
+                                        <option value="0">غرفة 2</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="d-inline-block">
+                                        <button class="btn btn-sm btn-outline-success add-row"><i class="fa fa-plus"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger delete-row"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                </td>
+                            </tr>`;
+
+                $('#scheduleTableBody').append(newRow);
+            });
+
+            $(document).on('click', '.delete-row', function(){
+                $(this).closest('tr').remove();
+            });
+        });
+    </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var timeSelect = document.querySelector(".timeSelect");
+            var startTime = 30;
+            var endTime = 200;
+            var increment = 5;
+
+            for (var i = startTime; i <= endTime; i += increment) {
+                var option = document.createElement("option");
+                option.value = i;
+                option.text = i + " دقيقة";
+                timeSelect.appendChild(option);
+            }
+        });
+    </script>
+
+
     {{-- add, edit, delete => script --}}
-    @include('back.users.add')
-    @include('back.users.edit')
-    @include('back.users.delete')
+    @include('back.time_table.add')
+    @include('back.time_table.edit')
+    @include('back.time_table.delete')
 
 
 @endsection
@@ -125,7 +184,7 @@
         </div>
         <!-- breadcrumb -->
 
-        @include('back.users.form')
+        @include('back.time_table.form')
 
         
         <div class="row row-sm">
@@ -366,7 +425,7 @@
                                             'Friday' => 'الجمعة',
                                         ];
 
-                                        $users = [
+                                        $time_table = [
                                             '1' => 'م 1',
                                             '2' => 'م 2',
                                             '3' => 'م 3',
@@ -447,7 +506,7 @@
                                                 <td></td>
                                             </tr>
 
-                                            @foreach ($users as $userKey => $userValue)
+                                            @foreach ($time_table as $userKey => $userValue)
                                                 <tr>
                                                     <td>{{ $userValue }}</td>                                                    
                                                     <td></td>
