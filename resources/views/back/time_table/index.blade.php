@@ -132,7 +132,7 @@
                                             <option value="45">45 دقيقة</option>
                                             <option value="50">50 دقيقة</option>
                                             <option value="55">55 دقيقة</option>
-                                            <option value="60">60 دقيقة</option>
+                                            <option value="60" selected>60 دقيقة</option>
                                             <option value="65">65 دقيقة</option>
                                             <option value="70">70 دقيقة</option>
                                             <option value="75">75 دقيقة</option>
