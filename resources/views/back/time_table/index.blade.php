@@ -6,11 +6,6 @@
 @endsection
 
 @section('header')
-    {{-- sweetalert --}}
-    <link href="{{ url('back') }}/assets/plugins/sweet-alert/sweetalert.css" rel="stylesheet">
-    {{-- fileupload --}}
-    <link href="{{ asset('back/assets/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css" />
-
     <style>
         .main_tr_day{
             background: #838080 !important;
@@ -28,19 +23,11 @@
             font-size: 12px !important;
             width: 25px !important;
         }
-
     </style>
+
 @endsection
 
-@section('footer')  
-    <script src="{{ url('back') }}/assets/plugins/sweet-alert/jquery.sweet-alert.js"></script>
-    <script src="{{ url('back') }}/assets/plugins/sweet-alert/sweetalert.min.js"></script>
-    <script src="{{ url('back') }}/assets/js/sweet-alert.js"></script>
-
-    <!-- fileupload -->
-    <script src="{{ asset('back/assets/file-upload-with-preview.min.js') }}"></script>
-    <script> new FileUploadWithPreview('file_upload') </script>
-
+@section('footer')      
     <script>
         // open modal when click button (insert)
         document.addEventListener('keydown', function(event){
@@ -52,20 +39,7 @@
                 $('.dataInput').val('');
             }
         });
-
-
-
-
-        // remove all errors and inputs data when close modal
-        $('.modal').on('hidden.bs.modal', function(){
-            $('form [id^=errors]').text('');
-            $(this).find("input").not("[name='_token']").val('');
-            document.querySelector("#image_preview_form").src = `{{ url('back/images/time_table/df_image.png') }}`;
-        });
         
-        
-        
-
         // cancel enter button 
         $(document).keypress(function (e) {
             if(e.which == 13){
@@ -73,128 +47,90 @@
             }
         });
 
-
+        // selectize
+        $('.selectize').selectize();
 
         // datatable
-        $(document).ready(function () {
-            $('#example1').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: `{{ url($pageNameEn.'/datatable') }}`,
-                dataType: 'json',
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'gender', name: 'gender'},
-                    {data: 'address', name: 'address'},
-                    {data: 'status', name: 'status'},
-                    {data: 'action', name: 'action', orderable: false},
-                ],
-                "bDestroy": true,
-                language: {sUrl: '{{ asset("back/assets/js/ar_dt.json") }}'},
-                lengthMenu: [[20, 50, 100, -1], [20, 50, 100, "الكل"]]
-            });
+        $('#satDataTable').DataTable({
+            ordering: false,
+            paging: false,
+            info: false,            
         });
     </script>
 
 
-
+    {{-- start get available times after select day + room + user --}}
     <script>
-        $(document).ready(function(){
-            $(document).on('click', '.add-row', function(e){
-                e.preventDefault();
-                var newRow = `<tr>
-                                <td>
-                                    <select class="form-control">
-                                        <option value="saturday">السبت</option>
-                                        <option value="sunday">الأحد</option>
-                                        <option value="monday">الاثنين</option>
-                                        <option value="tuesday">الثلاثاء</option>
-                                        <option value="wednesday">الأربعاء</option>
-                                        <option value="thursday">الخميس</option>
-                                        <option value="friday">الجمعة</option>
-                                    </select>    
-                                </td>
-                                <td>
-                                    <select class="form-control">
-                                        <option value="1">أساسية</option>
-                                        <option value="0">تعوضية</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select class="form-control timeSelect">
-                                            <option value="20">20 دقيقة</option>
-                                            <option value="25">25 دقيقة</option>
-                                            <option value="30">30 دقيقة</option>
-                                            <option value="35">35 دقيقة</option>
-                                            <option value="40">40 دقيقة</option>
-                                            <option value="45">45 دقيقة</option>
-                                            <option value="50">50 دقيقة</option>
-                                            <option value="55">55 دقيقة</option>
-                                            <option value="60" selected>60 دقيقة</option>
-                                            <option value="65">65 دقيقة</option>
-                                            <option value="70">70 دقيقة</option>
-                                            <option value="75">75 دقيقة</option>
-                                            <option value="80">80 دقيقة</option>
-                                            <option value="85">85 دقيقة</option>
-                                            <option value="90">90 دقيقة</option>
-                                            <option value="95">95 دقيقة</option>
-                                            <option value="100">100 دقيقة</option>
-                                            <option value="105">105 دقيقة</option>
-                                            <option value="110">110 دقيقة</option>
-                                            <option value="115">115 دقيقة</option>
-                                            <option value="120">120 دقيقة</option>
-                                            <option value="125">125 دقيقة</option>
-                                            <option value="130">130 دقيقة</option>
-                                            <option value="135">135 دقيقة</option>
-                                            <option value="140">140 دقيقة</option>
-                                            <option value="145">145 دقيقة</option>
-                                            <option value="150">150 دقيقة</option>
-                                            <option value="155">155 دقيقة</option>
-                                            <option value="160">160 دقيقة</option>
-                                            <option value="165">165 دقيقة</option>
-                                            <option value="170">170 دقيقة</option>
-                                            <option value="175">175 دقيقة</option>
-                                            <option value="180">180 دقيقة</option>
-                                            <option value="185">185 دقيقة</option>
-                                            <option value="190">190 دقيقة</option>
-                                            <option value="195">195 دقيقة</option>
-                                            <option value="200">200 دقيقة</option>
-    
-                                    </select>
-                                </td>
-                                <td><input type="time" class="form-control"></td>
-                                <td><input type="time" class="form-control"></td>
-                                <td>
-                                    <select class="form-control">
-                                        <option value="1">غرفه 1</option>
-                                        <option value="0">غرفة 2</option>
-                                        <option value="0">غرفة 2</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <div class="d-inline-block">
-                                        <button class="btn btn-sm btn-success add-row" style="padding: 5px 10px !important"><i class="fa fa-plus"></i></button>
-                                        <button class="btn btn-sm btn-danger delete-row" style="padding: 5px 10px !important"><i class="fa fa-trash"></i></button>
-                                    </div>
-                                </td>
-                            </tr>`;
+        const times = document.querySelector('form #times');
+        const btn_get_available_times = document.querySelector('form #btn_get_available_times');
 
-                $('#scheduleTableBody').append(newRow);
-            });
+        $(btn_get_available_times).click(function(e){
+            e.preventDefault();
 
-            $(document).on('click', '.delete-row', function(){
-                $(this).closest('tr').remove();
+            $.ajax({
+                url: `{{ url($pageNameEn) }}/get_available_times`,
+                type: 'POST',
+                processData: false,
+                contentType: false,    
+                data: new FormData($('.modal #form')[0]),
+                beforeSend:function () {
+                    $("form #times option").remove();
+
+                    document.querySelector('.modal #btn_get_available_times').disabled = true;
+                },
+                error: function(res){                    
+                    alertify.set('notifier','position', 'top-center');
+                    alertify.set('notifier','delay', 3);
+                    alertify.error("هناك شيئ ما خطأ");
+                },
+                success: function(res){
+                    let times = res.times;
+                    let timesToTimeTable = res.timesToTimeTable;
+
+                    times.forEach(time => {
+                        let isDuplicated = false;
+
+                        timesToTimeTable.forEach(timeTimeTable => {
+                            if((time.time+'-'+time.am_pm) == timeTimeTable.times){
+                                isDuplicated = true;
+                            }
+                        });
+
+                        if(!isDuplicated){
+                            $("form #times").append(`
+                                <option value="${time.time}-${time.am_pm}">${time.time}-${time.am_pm}</option>
+                            `)
+                        }
+                    });
+
+                    alertify.set('notifier','position', 'top-center');
+                    alertify.set('notifier','delay', 4);
+                    alertify.success("تمت جلب مواعيد الحصص المتاحة");
+
+                    document.querySelector('.modal #btn_get_available_times').disabled = false;
+                    
+                }
             });
         });
     </script>
+    {{-- end get available times after select day + room + user --}}
+
+
+    {{-- start get current day to open tab = current day --}}
+    <script>
+        var date = new Date();
+        var dayIndex = date.getDay();
+        var daysOfWeek = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+        var dayName = daysOfWeek[dayIndex];        
+    </script>
+    {{-- end get current day to open tab = current day --}}
+
+
 
     {{-- add, edit, delete => script --}}
     @include('back.time_table.add')
     @include('back.time_table.edit')
     @include('back.time_table.delete')
-
 
 @endsection
 
@@ -217,405 +153,172 @@
 
         @include('back.time_table.form')
 
-        
-        <div class="row row-sm">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
+        <div class="card overflow-hidden">
+            <div class="card-body">
+                <div class="panel-group1" id="accordion11">
+                    {{-- start sat table --}}
+                    <div class="panel panel-default  mb-4">
+                        <div class="panel-heading1 bg-primary ">
+                            <h4 class="panel-title1">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion11" href="#satAccord" aria-expanded="false">جدول السبت</a>
+                            </h4>
+                        </div>
+                        <div id="satAccord" class="panel-collapse collapse show" role="tabpanel" aria-expanded="true" style="">
+                            <div class="panel-body border">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover text-center text-md-nowrap" id="satDataTable">
+                                                <thead class="thead-dark">
+                                                    <tr>
+                                                        <th style="background: #364261;color: #fff;">الغرف الدراسية</th>
+                                                        @foreach ($times as $time)
+                                                            {{-- <th>{{ $time->time }} {{ $time->am_pm }}</th> --}}
+                                                            <th>
+                                                                {{ $time->time }} <br/> {{ $time->am_pm }}
+                                                            </th>                                        
+                                                        @endforeach
+                                                    </tr>
+                                                </thead>
+                
+                                                <tbody>
+                                                    @foreach ($rooms as $room)  {{-- start loop to rooms  --}}
+                                                        <tr>
+                                                            <td style="background: #364261;color: #fff;">(1) {{ $room->roomName }}</td>
 
-                        {{-- <div class="" id="accordion11">
-                            <div class="panel panel-default  mb-4">
-                                <div class="panel-heading1 bg-primary ">
-                                    <h4 class="panel-title1">
-                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion11" href="#collapseFour1" aria-expanded="true">Section 1<i class="fe fe-arrow-left ml-2"></i></a>
-                                    </h4>
-                                </div>
-                                <div id="collapseFour1" class="panel-collapse collapse show" role="tabpanel" aria-expanded="false" style="">
-                                    <div class="panel-body border">
-                                        <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
+                                                            {{-- start loop to times  --}}
+                                                            @foreach ($times as $time)                                                                  
+                                                                @php $printedTime = false; @endphp
+                
+                                                                @foreach ($satClassesUserOne as $satOne)
+                                                                    @if ($room->roomId == $satOne->room_id)
+                
+                                                                        @if (($time->time.'-'.$time->am_pm) == $satOne->times)
+                                                                            <th style="
+                                                                                        background: {{ $satOne->matColor }};
+                                                                                        color: #222;
+                                                                                        font-size: 10px !important;
+                                                                                        min-width: 60px;
+                                                                                        max-width: 60px;
+                                                                                        padding: 2px 0 0 !important;
+                                                                                        ">
+                                                                                {{-- {{ $time->time }}{{ $time->am_pm }}
+                                                                                <br /> --}}
+                                                                                {{ $satOne->groupName }}
+                                                                                {{-- <br />
+                                                                                {{ $satOne->teacherName }} --}}
+                                                                            </th>  
+                                                                            @php $printedTime = true; @endphp
+                                                                            @break                             
+                                                                        @endif   
+                
+                                                                    @endif                                                                            
+                                                                @endforeach
+                                                                
+                                                                @if ($printedTime == false)
+                                                                    <th>
+                                                                        {{-- {{ $time->time }} <br /> {{ $time->am_pm }} --}}
+                                                                    </th>
+                                                                @endif
+                                                                
+                                                            @endforeach 
+                                                            {{-- end loop to times  --}}
+                
+                                                        </tr>
+                                                        
+                                                        <tr>
+                                                            <td style="background: #c25710;color: #fff;">(2) {{ $room->roomName }}</td>
+
+                                                            {{-- start loop to times  --}}
+                                                            @foreach ($times as $time)                                                                  
+                                                                @php $printedTime = false; @endphp
+                
+                                                                @foreach ($satClassesUserTwo as $satOne)
+                                                                    @if ($room->roomId == $satOne->room_id)
+                
+                                                                        @if (($time->time.'-'.$time->am_pm) == $satOne->times)
+                                                                            <th style="
+                                                                                        background: {{ $satOne->matColor }};
+                                                                                        color: #222;
+                                                                                        font-size: 10px !important;
+                                                                                        min-width: 60px;
+                                                                                        max-width: 60px;
+                                                                                        padding: 2px 0 0 !important;
+                                                                                        ">
+                                                                                {{-- {{ $time->time }}{{ $time->am_pm }}
+                                                                                <br /> --}}
+                                                                                {{ $satOne->groupName }}
+                                                                                {{-- <br />
+                                                                                {{ $satOne->teacherName }} --}}
+                                                                            </th>  
+                                                                            @php $printedTime = true; @endphp
+                                                                            @break                             
+                                                                        @endif   
+                
+                                                                    @endif                                                                            
+                                                                @endforeach
+                                                                
+                                                                @if ($printedTime == false)
+                                                                    <th>
+                                                                        {{-- {{ $time->time }} <br /> {{ $time->am_pm }} --}}
+                                                                    </th>
+                                                                @endif
+                                                                
+                                                            @endforeach 
+                                                            {{-- end loop to times  --}}
+                
+                                                        </tr>
+                                                    @endforeach {{-- end loop to rooms  --}}
+                
+                                                </tbody>
+                
+                
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel panel-default mb-0">
-                                <div class="panel-heading1  bg-primary">
-                                    <h4 class="panel-title1">
-                                        <a class="accordion-toggle mb-0 collapsed" data-toggle="collapse" data-parent="#accordion11" href="#collapseFive2" aria-expanded="false">Section 2 <i class="fe fe-arrow-left ml-2"></i></a>
-                                    </h4>
-                                </div>
-                                <div id="collapseFive2" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
-                                    <div class="panel-body border">
-                                        <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words </p>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-
-
-
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover text-center text-md-nowrap" id="example1">
-                                {{-- <thead>
-                                    <tr>
-                                        <th class="wd-15p border-bottom-0">#</th>
-                                        <th class="wd-15p border-bottom-0" style="width: 20%;">الإسم</th>
-                                        <th class="wd-20p border-bottom-0" style="width: 20%;">الإيميل</th>
-                                        <th class="wd-20p border-bottom-0">النوع</th>
-                                        <th class="wd-15p border-bottom-0" style="width: 35%;">العنوان</th>
-                                        <th class="wd-10p border-bottom-0">الحالة</th>
-                                        <th class="wd-25p border-bottom-0">التحكم</th>
-                                    </tr>
-                                </thead> --}}
-
-
-
-                                {{-- @php
-                                    $times = [
-                                        'ص' => '8:00',
-                                        'ص' => '8:15',
-                                        'ص' => '8:30',
-                                        'ص' => '8:45',
-                                        
-                                        'ص' => '9:00',
-                                        'ص' => '9:15',
-                                        'ص' => '9:30',
-                                        'ص' => '9:45',
-                                        
-                                        'ص' => '10:00',
-                                        'ص' => '10:15',
-                                        'ص' => '10:30',
-                                        'ص' => '10:45',
-                                        
-                                        'ص' => '11:00',
-                                        'ص' => '11:15',
-                                        'ص' => '11:30',
-                                        'ص' => '11:45',
-                                        
-                                        'م' => '12:00',
-                                        'م' => '12:15',
-                                        'م' => '12:30',
-                                        'م' => '12:45',
-                                        
-                                        'م' => '1:00',
-                                        'م' => '1:15',
-                                        'م' => '1:30',
-                                        'م' => '1:45',
-                                        
-                                        'م' => '2:00',
-                                        'م' => '2:15',
-                                        'م' => '2:30',
-                                        'م' => '2:45',
-                                        
-                                        'م' => '3:00',
-                                        'م' => '3:15',
-                                        'م' => '3:30',
-                                        'م' => '3:45',
-                                        
-                                        'م' => '4:00',
-                                        'م' => '4:15',
-                                        'م' => '4:30',
-                                        'م' => '4:45',
-                                        
-                                        'م' => '5:00',
-                                        'م' => '5:15',
-                                        'م' => '5:30',
-                                        'م' => '5:45',
-                                        
-                                        'م' => '6:00',
-                                        'م' => '6:15',
-                                        'م' => '6:30',
-                                        'م' => '6:45',
-                                        
-                                        'م' => '7:00',
-                                        'م' => '7:15',
-                                        'م' => '7:30',
-                                        'م' => '7:45',
-                                        
-                                        'م' => '8:00',
-                                        'م' => '8:15',
-                                        'م' => '8:30',
-                                        'م' => '8:45',
-                                        
-                                        'م' => '9:00',
-                                        'م' => '9:15',
-                                        'م' => '9:30',
-                                        'م' => '9:45',
-                                        
-                                        'م' => '10:00',
-                                        'م' => '10:15',
-                                        'م' => '10:30',
-                                        'م' => '10:45',
-                                        
-                                        'م' => '11:00',
-                                        'م' => '11:15',
-                                        'م' => '11:30',
-                                        'م' => '11:45',
-                                        
-                                        'ص' => '12:00',                                        
-                                    ];  
-                                @endphp  --}}
-
-
-
-
-
-                                <thead>
-                                    <tr>
-                                        <th>يوم الأسبوع</th>
-                                        <th class="main_hour">8:00   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>8:15   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>8:30   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>8:45   <span style="font-size: 10px;">ص</span>  </th>
-
-                                        <th class="main_hour">9:00   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>9:15   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>9:30   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>9:45   <span style="font-size: 10px;">ص</span>  </th>
-
-                                        <th class="main_hour">10:00   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>10:15   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>10:30   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>10:45   <span style="font-size: 10px;">ص</span>  </th>
-
-                                        <th class="main_hour">11:00   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>11:15   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>11:30   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>11:45   <span style="font-size: 10px;">ص</span>  </th>
-
-                                        <th class="main_hour">12:00   <span style="font-size: 10px;">م</span>  </th>
-                                        <th>12:15   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>12:30   <span style="font-size: 10px;">ص</span>  </th>
-                                        <th>12:45   <span style="font-size: 10px;">ص</span>  </th>
-
-                                        <th class="main_hour">1:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>1:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>1:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>1:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">2:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>2:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>2:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>2:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">3:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>3:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>3:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>3:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">4:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>4:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>4:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>4:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">5:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>5:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>5:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>5:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">6:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>6:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>6:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>6:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">7:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>7:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>7:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>7:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">8:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>8:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>8:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>8:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">9:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>9:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>9:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>9:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">10:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>10:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>10:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>10:45    <span style="font-size: 10px;">م</span>  </th>
-
-                                        <th class="main_hour">11:00    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>11:15    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>11:30    <span style="font-size: 10px;">م</span>  </th>
-                                        <th>11:45    <span style="font-size: 10px;">م</span>  </th>                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $days = [
-                                            'Saturday' => 'السبت',
-                                            'Sunday' => 'الأحد',
-                                            'Monday' => 'الإثنين',
-                                            'Tuesday' => 'الثلاثاء',
-                                            'Wednesday' => 'الأربعاء',
-                                            'Thursday' => 'الخميس',
-                                            'Friday' => 'الجمعة',
-                                        ];
-
-                                        $time_table = [
-                                            '1' => 'م 1',
-                                            '2' => 'م 2',
-                                            '3' => 'م 3',
-                                            '4' => 'م 4',
-                                            '5' => 'م 5',
-                                            '6' => 'م 6',
-                                            '7' => 'م 7',
-                                        ];
-                                    @endphp 
-
-                                        @foreach ($days as $dayKey => $dayValue)
-                                            <tr class="main_tr_day">
-                                                <td>{{ $dayValue }}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>                                                
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-
-                                            @foreach ($time_table as $userKey => $userValue)
-                                                <tr>
-                                                    <td>{{ $userValue }}</td>                                                    
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                            @endforeach
-                                        @endforeach
-
-                                </tbody>
-                            </table>
                         </div>
                     </div>
+                    {{-- end sat table --}}
+                    
+
+
+                    {{-- start sun table --}}
+                    <div class="panel panel-default mb-4">
+                        <div class="panel-heading1  bg-primary">
+                            <h4 class="panel-title1">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion11" href="#sunAccord" aria-expanded="false">جدول الأحد</a>
+                            </h4>
+                        </div>
+                        <div id="sunAccord" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
+                            <div class="panel-body border">
+                                <p>sund</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- end sun table --}}
+                    
+                    
+                    {{-- start mon table --}}
+                    <div class="panel panel-default mb-4">
+                        <div class="panel-heading1  bg-primary">
+                            <h4 class="panel-title1">
+                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion11" href="#monAccord" aria-expanded="false">جدول الإثنين</a>
+                            </h4>
+                        </div>
+                        <div id="monAccord" class="panel-collapse collapse" role="tabpanel" aria-expanded="false">
+                            <div class="panel-body border">
+                                <p>mond</p>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- end sun table --}}
                 </div>
             </div>
         </div>
+        
+        
     </div>
 @endsection
 

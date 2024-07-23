@@ -2,6 +2,7 @@
     $(document).ready(function () {
         $(".modal #save").click(function(e){
             e.preventDefault();
+
             document.querySelector('.modal #save').disabled = true;        
             document.querySelector('.spinner_request').setAttribute("style", "display: inline-block;");
 
@@ -15,31 +16,63 @@
                     $('form [id^=errors]').text('');
                 },
                 error: function(res){
-                    $.each(res.responseJSON.errors, function (index , value) {
-                        $(`form #errors-${index}`).css('display' , 'block').text(value);
-                    });               
+                    $.each(res.responseJSON.errors, function(index, error) {
+                        $(`form #errors-${index}`).css('display' , 'block').text(error);
+                    });
                     
-                    $('.dataInput:first').select().focus();
                     document.querySelector('.modal #save').disabled = false;
                     document.querySelector('.spinner_request').style.display = 'none';                
 
                     alertify.set('notifier','position', 'top-center');
                     alertify.set('notifier','delay', 3);
-                    alertify.error("هناك شيئ ما خطأ");
+                    alertify.error("هناك شيئ ما خطأ أثناء حفظ الحصة");
                 },
                 success: function(res){
-                    $('#example1').DataTable().ajax.reload( null, false );
+                    
+                    // start after success remove all times and append this
+                    $("form #times option").remove();
+
+                    $("form #times").append(`
+                        <option class="text-center text-danger" disabled style="margin-top: 60px;font-size: 13px;">اختر أولا الغرفة الدراسية واليوم والمستخدم</option>
+                        <option class="text-center text-danger" disabled style="font-size: 13px;">لإظهار المواعيد المتاحة</option>
+                    `)
+                    // start after success remove all times and append this
+
+                    
+                    $("#group_id")[0].selectize.clear();
+
+
+                    // $('#satDataTable').DataTable().ajax.reload();                
                     $(".modal form bold[class=text-danger]").css('display', 'none');
             
-                    $(".dataInput").val('');
-                    $('.dataInput:first').select().focus();
-
                     document.querySelector('.modal #save').disabled = false;
                     document.querySelector('.spinner_request').style.display = 'none';
 
-                    alertify.set('notifier','position', 'top-center');
-                    alertify.set('notifier','delay', 3);
-                    alertify.success("تمت الإضافة بنجاح");
+                    // alertify.set('notifier','position', 'top-center');
+                    // alertify.set('notifier','delay', 3);
+                    // alertify.success("تم حفظ الحصة بنجاح");
+
+
+
+
+                    alertify.confirm('تم حفظ الحصة بنجاح <i class="fas fa-check text-success" style="margin: 0px 3px;"></i>', 'هل تريد إضافة مواعيد لحصة جديدة ؟', 
+                    function(){ 
+
+                    }, function(){ 
+                        $('.modal').modal('hide');
+                    }).set({
+                        labels:{
+                            ok:"نعم <i class='fas fa-check text-success' style='margin: 0px 3px;'></i>",
+                            cancel: "لاء <i class='fa fa-times text-light' style='margin: 0px 3px;'></i>"
+                        }
+                    });
+
+
+
+
+
+
+
                 }
             });
         });

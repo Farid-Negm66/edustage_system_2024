@@ -75,19 +75,30 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Back'], func
     });
 
 
+    // times Routes
+    Route::group(['prefix' => 'times'] , function (){
+        Route::get('/' , 'TimesController@index');
+        Route::post('/store' , 'TimesController@store');
+        Route::get('/edit/{id}' , 'TimesController@edit');
+        Route::post('/update/{id}' , 'TimesController@update');
+        Route::get('/destroy/{id}' , 'TimesController@destroy');
+
+        Route::get('datatable' , 'TimesController@datatable');
+    });
+
+
     // time_table Routes
     Route::group(['prefix' => 'time_table'] , function (){
         Route::get('/' , 'TimeTableController@index');
-        Route::get('/crm_info/{id}' , 'TimeTableController@crm_info');
-        Route::post('/crm_info_update/{id}' , 'TimeTableController@crm_info_update');
-        Route::get('/destroy/{id}' , 'TimeTableController@destroy');
         
+        Route::post('/get_available_times' , 'TimeTableController@get_available_times');
+        
+        Route::post('/store' , 'TimeTableController@store');
+        Route::get('/edit/{id}' , 'TimeTableController@edit');
+        Route::post('/update/{id}' , 'TimeTableController@update');
+        Route::get('/destroy/{id}' , 'TimeTableController@destroy');
+
         Route::get('datatable' , 'TimeTableController@datatable');
-
-
-        Route::group(['prefix' => 'report'], function(){
-            Route::get('/crm_pdf/{id}', 'ParentController@crm_pdf');                
-        });
     });
 
 

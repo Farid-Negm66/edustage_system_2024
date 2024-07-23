@@ -1,0 +1,100 @@
+@foreach ($rooms as $room)
+    <tr>
+        <td style="background: #d93939;color: #fff;">{{ $room->RoomName }}</td>                                                    
+
+        @if($room->RoomID == 1)                                                
+            @foreach ($times as $time)
+                @php $printed = false; @endphp
+
+                @foreach ($satUserOne as $satOne)
+                    @if ($time->time == $satOne->time_from)                                                    
+                        <th style="background: rgb(220, 191, 42);">{{ $time->time }} <br /> {{ $time->am_pm }}</th>   
+                        @php
+                            $printed = true;
+                        @endphp
+                        @break
+                    @endif
+                @endforeach
+
+                @if (!$printed)
+                    <th>{{ $time->time }} {{ $time->am_pm }}</th>
+                @endif
+            @endforeach                                            
+        @endif
+    </tr>
+@endforeach
+
+
+
+
+
+
+
+
+{{-- start add new row --}}
+    <script>
+        $(document).ready(function(){
+            $(document).on('click', '.add-row', function(e){
+                e.preventDefault();
+                var newRow = `
+                                <tr>
+                                    <td>
+                                        <select class="form-control" name="day[]">
+                                            <option value="السبت">السبت</option>
+                                            <option value="الأحد">الأحد</option>
+                                            <option value="الاثنين">الاثنين</option>
+                                            <option value="الثلاثاء">الثلاثاء</option>
+                                            <option value="الأربعاء">الأربعاء</option>
+                                            <option value="الخميس">الخميس</option>
+                                            <option value="الجمعة">الجمعة</option>
+                                        </select>    
+                                        <bold class="text-danger" id="errors-day" style="display: none;"></bold>    
+                                    </td>
+                                    <td>
+                                        <select class="form-control" name="class_type[]">
+                                            <option value="أساسية">أساسية</option>
+                                            <option value="تعوضية">تعوضية</option>
+                                        </select>
+                                        <bold class="text-danger" id="errors-class_type" style="display: none;"></bold>
+                                    </td>
+                                    <td class="times">
+                                        <select name="times[]" class="form-control dataInput times" style="height: 150px !important;" multiple>
+                                            <option value="" selected disabled>مواعيد الحصص</option>
+                                            @foreach ($times as $time)
+                                                <option value="{{ $time->time }}">
+                                                    {{ $time->time }} - 
+                                                    {{ $time->am_pm }}
+                                                </option>
+                                            @endforeach
+                                        </select>            
+                                        <bold class="text-danger" id="errors-times" style="display: none;"></bold>
+                                    </td>
+
+                                    <td>
+                                        <select class="form-control room_id" name="room_id[]" required>
+                                            <option value="" selected disabled>الغرف الدراسية</option>
+                                            @foreach ($rooms as $room)
+                                                <option value="{{ $room->roomId }}">{{ $room->roomName }}</option>                                            
+                                            @endforeach
+                                        </select>
+                                        <bold class="text-danger" id="errors-room_id" style="display: none;"></bold>
+                                    </td>
+                                    <td>
+                                        <div class="d-inline-block">
+                                            <button class="btn btn-sm btn-success add-row" style="padding: 5px 10px !important"><i class="fa fa-plus"></i></button>
+                                            <button class="btn btn-sm btn-danger delete-row" style="padding: 5px 10px !important"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            `;
+
+                $('#scheduleTableBody').append(newRow);
+                newRow.find('.selectize').selectize();
+            });
+
+            $(document).on('click', '.delete-row', function(){
+                $(this).closest('tr').remove();
+            });
+        });
+    </script>
+    {{-- end add new row --}}

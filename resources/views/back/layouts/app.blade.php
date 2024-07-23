@@ -12,7 +12,7 @@
     <meta name="Keywords" content="dashboard, admin, bootstrap admin template, codeigniter, php, php framework, codeigniter 4, php mvc, php codeigniter, best php framework, codeigniter admin, codeigniter dashboard, admin panel template, bootstrap 4 admin template, bootstrap dashboard template"/>
 
     <!-- Title -->
-    <title> edustage HR @yield('title') </title>
+    <title> أكاديمية اديوستديج -  @yield('title') </title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('back') }}/assets/img/brand/favicon.png" type="image/x-icon"/>
@@ -56,6 +56,11 @@
     <link href="{{ asset('back/assets/css-rtl/alertify.rtl.min.css') }}" type="text/css" rel="stylesheet"/>
     <link href="{{ asset('back/assets/css-rtl/default.rtl.min.css') }}" type="text/css" rel="stylesheet"/>
 
+    <!-- selectize -->
+    <link href="{{ asset('back/assets/selectize.css') }}" type="text/css" rel="stylesheet"/>
+
+    {{-- flatpickr --}}
+    <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 
     @yield('header')
     
@@ -131,6 +136,12 @@
             }
         }
 
+        .side-menu__label{
+            font-size: 12.5px;
+        }
+        .slide-item{
+            font-size: 11px;
+        }
 
         /* ////////////////////////////////////////////  top css new css edit  ///////////////////////////////////////////////// */
 
@@ -221,6 +232,7 @@
     </style>
 </head>
 
+{{-- hoversubmenu main-body app sidebar-mini sidenav-toggled --}}
 <body class="hoversubmenu main-body app sidebar-mini  {{-- hoversubmenu main-body app sidebar-mini       dark-theme --}}">
     
     <!-- Start Switcher -->
@@ -361,6 +373,11 @@
 
 	
 
+    {{-- selectize --}}
+    <script src="{{ asset('back/assets/selectize.min.js') }}"></script>
+    
+    {{-- flatpickr --}}
+    <script src="https://unpkg.com/flatpickr/dist/flatpickr.min.js"></script>
 
     @yield('footer')
 
