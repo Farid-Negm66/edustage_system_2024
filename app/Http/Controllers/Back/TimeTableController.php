@@ -64,8 +64,6 @@ class TimeTableController extends Controller
                     ->select('tbl_rooms.RoomID as roomId', 'tbl_rooms.RoomName as roomName')
                     ->orderBy('tbl_rooms.RoomName', 'DESC')
                     ->get();
-        
-        
 
 
         $satClassesUserOne = $this->daysClasses('السبت', 1);
@@ -134,7 +132,7 @@ class TimeTableController extends Controller
                     'times' => request('times')[$i],
                     'room_id' => request('room_id'),
                     'user' => request('user'),
-                    'group_to_colspan' => 2,
+                    'group_to_colspan' => $this->getLastId('time_tables', 'group_to_colspan'),
                     'user_add' => 1,
                     'user_edit' => 2,
                     'created_at' => Carbon::now(),
@@ -147,14 +145,42 @@ class TimeTableController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($group_id, $group_to_colspan)
     {
         if (request()->ajax()){
-            $find = User::where('id', $id)->first();
-            return response()->json($find);
+            $findTimesTimeTable = TimeTable::where('group_id', $group_id)
+                                            ->where('group_to_colspan', $group_to_colspan)
+                                            ->leftJoin('tbl_groups', 'tbl_groups.ID', 'time_tables.group_id')
+                                            ->leftJoin('tbl_rooms', 'tbl_rooms.RoomID', 'time_tables.room_id')      
+                                            ->select(
+                                                'time_tables.*',
+                                                'tbl_groups.GroupName as groupName',
+                                                'tbl_rooms.RoomName as roomName',
+                                            ) 
+                                            ->get();
+
+
+
+            $timesToTimeTable = DB::table('time_tables')
+                                            ->where('day', request('day'))
+                                            ->where('room_id', request('room_id'))
+                                            ->where('user', request('user'))
+                                            ->get();
+
+            $times = Times::orderBy('am_pm', 'asc')->orderBy('order', 'asc')->get();
+
+            return response()->json([
+                'findTimesTimeTable' => $findTimesTimeTable,
+                'timesToTimeTable' => $timesToTimeTable,
+                'times' => $times,
+            ]);
         }
         return response()->json(['failed' => 'Access Denied']);
     }
+
+
+
+
 
     public function update(Request $request, $id)
     {

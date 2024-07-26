@@ -91,10 +91,12 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Back'], func
     Route::group(['prefix' => 'time_table'] , function (){
         Route::get('/' , 'TimeTableController@index');
         
-        Route::post('/get_available_times' , 'TimeTableController@get_available_times');
+        Route::get('/get_available_times' , 'TimeTableController@get_available_times');
         
         Route::post('/store' , 'TimeTableController@store');
-        Route::get('/edit/{id}' , 'TimeTableController@edit');
+
+        Route::get('/edit/{group_id}/{group_to_colspan}' , 'TimeTableController@edit');
+
         Route::post('/update/{id}' , 'TimeTableController@update');
         Route::get('/destroy/{id}' , 'TimeTableController@destroy');
 
