@@ -9,13 +9,11 @@
         </div>
         
         <div class="modal-body">
-            <form class="" id="form" enctype="multipart/form-data">
+            <form class="" id="addForm" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" id="res_id" value="" />               
-
-                <h4 class="mb-4">جدول الحصص</h4>
+                {{-- <h4 class="mb-4">جدول الحصص</h4> --}}
                 
-                <div class="pd-30 pd-sm-40 bg-gray-100">
+                <div class="pd-30 pd-sm-40" style="background-image: linear-gradient(to right, #c3cdf3 0, #f7d7d7 100%) !important;">
                     <div class="row row-xs">                   
                         <div class="col-lg-7">
                             <div class="col-xs-12">
@@ -70,8 +68,8 @@
                                 <i class="fas fa-star require_input"></i>
                                 <div>
                                     <select class="form-control user" name="user" id="user" required>
-                                        <option value="1">1</option>                                            
-                                        <option value="2">2</option>                                            
+                                        <option value="1" style="font-size: 16px !important;font-weight: bold !important;">1 (*)</option>                                            
+                                        <option value="2" style="font-size: 16px !important;font-weight: bold !important;">2 (#)</option>                                            
                                     </select>
                                 </div>
                                 <bold class="text-danger" id="errors-user" style="display: none;"></bold>                                      
@@ -81,7 +79,7 @@
                                 <label for="class_type">نوع الحصة</label>
                                 <i class="fas fa-star require_input"></i>
                                 <div>
-                                    <select class="form-control" name="class_type">
+                                    <select class="form-control" name="class_type" id="class_type">
                                         <option value="أساسية">أساسية</option>
                                         <option value="تعوضية">تعوضية</option>
                                     </select>                                        
@@ -115,7 +113,7 @@
                         </div>
                     </div>                    
                     <br>
-                    <button type="button" class="btn btn-warning btn-lg btn-block text-dark btn_get_available_times">
+                    <button type="button" class="btn btn-warning btn-lg btn-block text-dark btn_get_available_times" style="font-weight: bold;">
                         إظهار المواعيد المتاحة
                         <i class="fa fa-search"></i>
                     </button>

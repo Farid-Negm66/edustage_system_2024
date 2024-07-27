@@ -56,6 +56,22 @@
             paging: false,
             info: false,            
         });
+
+        // when close modal either add modal or edit
+        $('#exampleModalCenter, #editModal').on('hidden.bs.modal', function () {
+            var hasDisabledOption = $('#addForm option:disabled').length > 0;
+            if(!hasDisabledOption){
+                $("#addForm #times option").remove();
+            }
+
+            $("#editForm #times option").remove();
+        });
+
+        // when change any option off day or room or user or class_type off any modal either add or edit
+        $('#addForm #day, #addForm #room_id, #addForm #user, #editForm #day, #editForm #room_id, #editForm #user').on('change', function(){
+            $("#addForm #times option").remove();
+            $("#editForm #times option").remove();
+        });
     </script>
 
 
@@ -135,22 +151,22 @@
 
     {{-- start get available times after select day + room + user in ADD FORM --}}
     <script>
-        const times = document.querySelector('#exampleModalCenter #times');
-        const btn_get_available_times = document.querySelector('#exampleModalCenter .btn_get_available_times');
+        const times = document.querySelector('#addForm #times');
+        const btn_get_available_times = document.querySelector('#addForm .btn_get_available_times');
 
         $(btn_get_available_times).click(function(e){
             e.preventDefault();
 
             $.ajax({
-                url: `{{ url($pageNameEn) }}/get_available_times`,
+                url: `{{ url($pageNameEn) }}/get_available_times_to_add_form`,
                 type: 'GET',
                 processData: false,
                 contentType: false,    
-                data: new FormData($('#exampleModalCenter #form')[0]),
+                data: $("#addForm").serialize(),
                 beforeSend:function () {
-                    $("#exampleModalCenter #times option").remove();
+                    $("#addForm #times option").remove();
 
-                    document.querySelector('#exampleModalCenter .btn_get_available_times').disabled = true;
+                    document.querySelector('#addForm .btn_get_available_times').disabled = true;
                 },
                 error: function(res){                    
                     alertify.set('notifier','position', 'top-center');
@@ -171,7 +187,7 @@
                         });
 
                         if(!isDuplicated){
-                            $("#exampleModalCenter #times").append(`
+                            $("#addForm #times").append(`
                                 <option value="${time.time}-${time.am_pm}">${time.time}-${time.am_pm}</option>
                             `)
                         }
@@ -181,7 +197,7 @@
                     alertify.set('notifier','delay', 4);
                     alertify.success("تمت جلب مواعيد الحصص المتاحة");
 
-                    document.querySelector('#exampleModalCenter .btn_get_available_times').disabled = false;
+                    document.querySelector('#addForm .btn_get_available_times').disabled = false;
                     
                 }
             });
@@ -201,7 +217,7 @@
                 e.preventDefault();
                 
                 $.ajax({
-                    url: `{{ url($pageNameEn) }}/get_available_times`,
+                    url: `{{ url($pageNameEn) }}/get_available_times_to_edit_form`,
                     type: 'GET',
                     processData: false,
                     contentType: false,    

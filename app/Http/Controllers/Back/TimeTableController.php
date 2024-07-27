@@ -91,7 +91,23 @@ class TimeTableController extends Controller
         return view('back.time_table.index' , compact('pageNameAr' , 'pageNameEn', 'groups', 'rooms', 'times', 'satClassesUserOne', 'satClassesUserTwo'));
     }
 
-    public function get_available_times(Request $request)
+    public function get_available_times_to_add_form(Request $request)
+    {
+        $timesToTimeTable = DB::table('time_tables')
+                                ->where('day', request('day'))
+                                ->where('room_id', request('room_id'))
+                                ->where('user', request('user'))
+                                ->get();
+
+        $times = Times::orderBy('am_pm', 'asc')->orderBy('order', 'asc')->get();
+
+        return response()->json([
+            'timesToTimeTable' => $timesToTimeTable,
+            'times' => $times,
+        ]);
+    }
+    
+    public function get_available_times_to_edit_form(Request $request)
     {
         $timesToTimeTable = DB::table('time_tables')
                                 ->where('day', request('day'))

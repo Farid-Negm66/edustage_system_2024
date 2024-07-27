@@ -12,7 +12,7 @@
 		<meta name="Keywords" content="dashboard, admin, bootstrap admin template, codeigniter, php, php framework, codeigniter 4, php mvc, php codeigniter, best php framework, codeigniter admin, codeigniter dashboard, admin panel template, bootstrap 4 admin template, bootstrap dashboard template"/>
 
 		<!-- Title -->
-		<title> أكاديمية إديوستيدج | تسجيل الدخول </title>
+		<title> أكاديمية إديوستيدج - تسجيل الدخول </title>
 
 		<!-- Favicon -->
 		<link rel="icon" href="{{ asset('back/images/settings/logo.png') }}" type="image/x-icon"/>

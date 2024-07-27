@@ -19,7 +19,7 @@
                 <input type="hidden" id="group_to_colspan_res" /> 
                 
                 
-                <div class="pd-30 pd-sm-40" style="background-image: linear-gradient(to right, #e5c0ff 0, #cecece 100%) !important;">
+                <div class="pd-30 pd-sm-40" style="background-image: linear-gradient(to right, #c9b5d7 0, #cecece 100%) !important;">
                     <div class="row row-xs">                   
                         <div class="col-lg-4">
                             <div class="col-xs-12">
@@ -74,8 +74,8 @@
                                 <i class="fas fa-star require_input"></i>
                                 <div>
                                     <select class="form-control user" name="user" id="user" required>
-                                        <option value="1">1</option>                                            
-                                        <option value="2">2</option>                                            
+                                        <option value="1" style="font-size: 16px !important;font-weight: bold !important;">1 (*)</option>                                            
+                                        <option value="2" style="font-size: 16px !important;font-weight: bold !important;">2 (#)</option>                                            
                                     </select>
                                 </div>
                                 <bold class="text-danger" id="errors-user" style="display: none;"></bold>                                      
@@ -106,7 +106,7 @@
                             <div class="col-xs-12">
                                 <label for="recorded_times">مواعيد الحصة المسجلة</label>
                                 <div>
-                                    <select id="recorded_times" name="recorded_times[]" class="form-control dataInput recorded_times" style="height: 302px !important;overflow: auto;" multiple>
+                                    <select id="recorded_times" name="recorded_times[]" class="form-control dataInput recorded_times" style="height: 377px !important;overflow: auto;" multiple>
 
                                     </select>            
                                 </div>
@@ -125,7 +125,7 @@
                             <div class="col-xs-12">
                                 <label for="times">مواعيد الحصص المتاحة</label>
                                 <div>
-                                    <select id="times" name="times[]" class="form-control dataInput times" style="height: 340px !important;" multiple>
+                                    <select id="times" name="times[]" class="form-control dataInput times" style="height: 414px !important;" multiple>
 
                                     </select>            
                                 </div>
@@ -134,7 +134,7 @@
                         </div>
                     </div>                    
                     <br>
-                    <button type="button" class="btn btn-warning btn-lg btn-block text-dark btn_get_available_times">
+                    <button type="button" class="btn btn-warning btn-lg btn-block text-dark btn_get_available_times" style="font-weight: bold;">
                         إظهار المواعيد المتاحة
                         <i class="fa fa-search"></i>
                     </button>

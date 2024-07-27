@@ -1,17 +1,17 @@
 <script>
     $(document).ready(function () {
-        $(".modal #save").click(function(e){
+        $("#exampleModalCenter #save").click(function(e){
             e.preventDefault();
 
-            document.querySelector('.modal #save').disabled = true;        
-            document.querySelector('.spinner_request').setAttribute("style", "display: inline-block;");
+            document.querySelector('#exampleModalCenter #save').disabled = true;        
+            document.querySelector('#exampleModalCenter .spinner_request').setAttribute("style", "display: inline-block;");
 
             $.ajax({
                 url: "{{ url($pageNameEn) }}/store",
                 type: 'POST',
                 processData: false,
                 contentType: false,
-                data: new FormData($('.modal #form')[0]),
+                data: new FormData($('#exampleModalCenter form')[0]),
                 beforeSend:function () {
                     $('form [id^=errors]').text('');
                 },
@@ -20,8 +20,8 @@
                         $(`form #errors-${index}`).css('display' , 'block').text(error);
                     });
                     
-                    document.querySelector('.modal #save').disabled = false;
-                    document.querySelector('.spinner_request').style.display = 'none';                
+                    document.querySelector('#exampleModalCenter #save').disabled = false;
+                    document.querySelector('#exampleModalCenter .spinner_request').style.display = 'none';                
 
                     alertify.set('notifier','position', 'top-center');
                     alertify.set('notifier','delay', 3);
@@ -30,9 +30,9 @@
                 success: function(res){
                     
                     // start after success remove all times and append this
-                    $("form #times option").remove();
+                    $("#exampleModalCenter form #times option").remove();
 
-                    $("form #times").append(`
+                    $("#exampleModalCenter form #times").append(`
                         <option class="text-center text-danger" disabled style="margin-top: 60px;font-size: 13px;">اختر أولا الغرفة الدراسية واليوم والمستخدم</option>
                         <option class="text-center text-danger" disabled style="font-size: 13px;">لإظهار المواعيد المتاحة</option>
                     `)
@@ -43,35 +43,22 @@
 
 
                     // $('#satDataTable').DataTable().ajax.reload();                
-                    $(".modal form bold[class=text-danger]").css('display', 'none');
+                    $("#exampleModalCenter form bold[class=text-danger]").css('display', 'none');
             
-                    document.querySelector('.modal #save').disabled = false;
-                    document.querySelector('.spinner_request').style.display = 'none';
-
-                    // alertify.set('notifier','position', 'top-center');
-                    // alertify.set('notifier','delay', 3);
-                    // alertify.success("تم حفظ الحصة بنجاح");
-
-
-
+                    document.querySelector('#exampleModalCenter #save').disabled = false;
+                    document.querySelector('#exampleModalCenter .spinner_request').style.display = 'none';
 
                     alertify.confirm('تم حفظ الحصة بنجاح <i class="fas fa-check text-success" style="margin: 0px 3px;"></i>', 'هل تريد إضافة مواعيد لحصة جديدة ؟', 
                     function(){ 
 
                     }, function(){ 
-                        $('.modal').modal('hide');
+                        $('#exampleModalCenter').modal('hide');
                     }).set({
                         labels:{
                             ok:"نعم <i class='fas fa-check text-success' style='margin: 0px 3px;'></i>",
                             cancel: "لاء <i class='fa fa-times text-light' style='margin: 0px 3px;'></i>"
                         }
                     });
-
-
-
-
-
-
 
                 }
             });

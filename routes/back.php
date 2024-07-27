@@ -91,7 +91,8 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Back'], func
     Route::group(['prefix' => 'time_table'] , function (){
         Route::get('/' , 'TimeTableController@index');
         
-        Route::get('/get_available_times' , 'TimeTableController@get_available_times');
+        Route::get('/get_available_times_to_add_form' , 'TimeTableController@get_available_times_to_add_form');
+        Route::get('/get_available_times_to_edit_form' , 'TimeTableController@get_available_times_to_edit_form');
         
         Route::post('/store' , 'TimeTableController@store');
 
