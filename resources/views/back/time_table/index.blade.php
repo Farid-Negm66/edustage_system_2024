@@ -28,14 +28,14 @@
 @endsection
 
 @section('footer')      
-    <script>
+    <script>        
         // open modal when click button (insert)
         document.addEventListener('keydown', function(event){
             if( event.which === 45 ){
-                $('.modal').modal('show');
-                document.querySelector('.modal .modal-header .modal-title').innerText = 'إضافة';
-                document.querySelector('.modal .modal-footer #save').setAttribute('style', 'display: inline;');
-                document.querySelector('.modal .modal-footer #update').setAttribute('style', 'display: none;');
+                $('#exampleModalCenter').modal('show');
+                document.querySelector('#exampleModalCenter .modal-header .modal-title').innerText = 'إضافة';
+                document.querySelector('#exampleModalCenter .modal-footer #save').setAttribute('style', 'display: inline;');
+                document.querySelector('#exampleModalCenter .modal-footer #update').setAttribute('style', 'display: none;');
                 $('.dataInput').val('');
             }
         });
@@ -63,13 +63,15 @@
             if(!hasDisabledOption){
                 $("#addForm #times option").remove();
             }
+            $("#addForm #group_id")[0].selectize.clear();
 
             $("#editForm #times option").remove();
+            $("#editForm #group_id")[0].selectize.clear();
         });
 
         // when change any option off day or room or user or class_type off any modal either add or edit
         $('#addForm #day, #addForm #room_id, #addForm #user, #editForm #day, #editForm #room_id, #editForm #user').on('change', function(){
-            $("#addForm #times option").remove();
+            $("#addForm #times option").remove();            
             $("#editForm #times option").remove();
         });
     </script>

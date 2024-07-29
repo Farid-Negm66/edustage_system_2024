@@ -79,7 +79,7 @@
 								<div class="container p-0">
 									<div class="row">
 										<div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
-											<div class="card-sigin" style="margin-top: -70px;">
+											<div class="card-sigin">
 												<div class="mb-5 d-flex" style="margin-bottom: 2rem !important;">
 													<img src="{{ asset('back/images/settings/logo.png') }}" class="sign-favicon ht-60" alt="أكاديمية إديوستيدج">
 													<h1 class="main-logo1 mr-1 mr-0 my-auto" style="padding-top: 14px;font-size: 25px !important;text-decoration: underline;">أكاديمية إديوستيدج</h1>

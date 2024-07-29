@@ -93,20 +93,3 @@
 	// 	});
 	// });
 </script>
-
-<script>
-	$(document).ready(function () {
-		$(".dark_theme").click(function(){
-			$("body").toggleClass("dark-theme");
-			$(this).css('display', 'none');
-			$('.light_theme').css('display', 'block');
-		});		
-		
-		$(".light_theme").click(function(){
-			$("body").removeClass("dark-theme");
-			$(this).css('display', 'none');
-			$('.dark_theme').css('display', 'block');
-		});		
-	});
-
-</script>

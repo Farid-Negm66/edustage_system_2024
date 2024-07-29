@@ -2,9 +2,15 @@
     ///////////////////////////////// edit /////////////////////////////////
     $(document).on("click" , "#example1 tr .edit" ,function(){
         const res_id = $(this).attr("res_id");
+        var datepicker = flatpickr(".datePicker", {
+            enableTime: true,
+            noCalendar: true,
+            dateFormat: "h:i",
+        });
+
 
         $.ajax({
-            url: `{{ url($pageNameEn) }}/edit/${res_id}`,
+            url: `{{ url('times/edit/${res_id}') }}`,
             type: 'GET',
             dataType: 'json',
             beforeSend: function(){
@@ -14,6 +20,8 @@
                 $.each(res , function(index, value){                    
                     $(`.modal form #${index}`).val(value);
                 });
+                
+                datepicker.setDate(res.time, true); 
 
                 document.querySelector("#res_id").value = res_id;
                 
@@ -35,10 +43,10 @@
         document.querySelector('.modal #update').disabled = true;        
         document.querySelector('.spinner_request2').setAttribute("style", "display: inline-block;");
 
-
         const res_id = $(".modal form #res_id").val();
+        
         $.ajax({
-            url: `{{ url($pageNameEn) }}/update/${res_id}`,
+            url: `{{ url('times/update/${res_id}') }}`,
             type: 'POST',
             processData: false,
             contentType: false,
@@ -51,7 +59,6 @@
                     $(`form #errors-${index}`).css('display' , 'block').text(value);
                 });               
                 
-                $('.dataInput:first').select().focus();
                 document.querySelector('.modal #update').disabled = false;
                 document.querySelector('.spinner_request2').style.display = 'none';                
 
@@ -64,10 +71,13 @@
                 $(".modal form bold[class=text-danger]").css('display', 'none');
         
                 $(".dataInput").val('');
-                $(".modal").modal('hide');
+                $('.dataInput:first').select().focus();
 
                 document.querySelector('.modal #update').disabled = false;
                 document.querySelector('.spinner_request2').style.display = 'none';
+                
+                $('.modal').modal('hide');
+                $('.flatpickr-time').hide();
 
                 alertify.set('notifier','position', 'top-center');
                 alertify.set('notifier','delay', 3);

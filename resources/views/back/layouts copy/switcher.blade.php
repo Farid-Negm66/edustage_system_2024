@@ -14,17 +14,17 @@
                     <div class="swichermainleft">
                         <h4>Navigation Style</h4>
                         <div class="pl-3 pr-3">
-                            <a href="{{ asset('back') }}/{{ asset('back') }}/pages/horizontal-light.html" class="btn btn-danger btn-block mt-0">Horizontal</a>
-                            <a href="{{ asset('back') }}/{{ asset('back') }}/pages/icon-light.html" class="btn btn-info btn-block">Left-menu</a>
+                            <a href="horizontal-light.html" class="btn btn-danger btn-block mt-0">Horizontal</a>
+                            <a href="icon-light.html" class="btn btn-info btn-block">Left-menu</a>
                         </div>
                     </div>
                     <div class="swichermainleft">
                         <h4>Skin Modes</h4>
                         <div class="pl-0 pr-0">
-                            <a class="wscolorcode blackborder nav-hor navstyle1" href="{{ asset('back') }}/{{ asset('back') }}/pages/icon-light.html">
+                            <a class="wscolorcode blackborder nav-hor navstyle1" href="icon-light.html">
                                 Light-theme
                             </a>
-                            <a class="wscolorcode blackborder nav-hor navstyle1" href="{{ asset('back') }}/{{ asset('back') }}/pages/icon-dark.html">
+                            <a class="wscolorcode blackborder nav-hor navstyle1" href="icon-dark.html">
                                 Dark-theme
                             </a>
                         </div>

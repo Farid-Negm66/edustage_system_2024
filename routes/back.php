@@ -106,6 +106,21 @@ Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Back'], func
 
 
 
+    // groups Routes
+    Route::group(['prefix' => 'students_rates'] , function (){
+        Route::get('/' , 'StudentsRatesController@index');
+        
+        Route::get('/get_groups_by_teacher_date/{fromtDate}/{toDate}/{teacher}' , 'StudentsRatesController@get_groups_by_teacher_date');
+
+        Route::post('/store' , 'StudentsRatesController@store');
+        Route::get('/edit/{id}' , 'StudentsRatesController@edit');
+        Route::post('/update/{id}' , 'StudentsRatesController@update');
+        Route::get('/destroy/{id}' , 'StudentsRatesController@destroy');
+
+        Route::get('datatable' , 'StudentsRatesController@datatable');
+    });
+    
+
 
 
 

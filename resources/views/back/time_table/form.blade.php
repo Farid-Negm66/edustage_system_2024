@@ -67,10 +67,10 @@
                                 <label for="user">مستخدم</label>
                                 <i class="fas fa-star require_input"></i>
                                 <div>
-                                    <select class="form-control user" name="user" id="user" required>
-                                        <option value="1" style="font-size: 16px !important;font-weight: bold !important;">1 (*)</option>                                            
-                                        <option value="2" style="font-size: 16px !important;font-weight: bold !important;">2 (#)</option>                                            
-                                    </select>
+                                    <select class="form-control user" name="user" id="user" required style="font-size: 17px;font-weight: bold;">
+                                    <option value="1" style="font-size: 16px !important;font-weight: bold !important;">1 (*)</option>                                            
+                                    <option value="2" style="font-size: 16px !important;font-weight: bold !important;">2 (#)</option>                                            
+                                </select>
                                 </div>
                                 <bold class="text-danger" id="errors-user" style="display: none;"></bold>                                      
                             </div>

@@ -1,11 +1,11 @@
-
 <!doctype html>
-<html lang="en" dir="rtl">
-	<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<html lang="en" dir="ltr">	
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
     <meta name="Author" content="Spruko Technologies Private Limited">
@@ -29,8 +29,8 @@
     <!-- P-scroll bar css-->
     <link href="{{ asset('back') }}/assets/plugins/perfect-scrollbar/p-scrollbar.css" rel="stylesheet" />
 
-    <!-- Sidemenu css -->
-    <link rel="stylesheet" href="{{ asset('back') }}/assets/css-rtl/sidemenu.css">
+    <!--  Left-Sidebar css -->
+    <link rel="stylesheet" href="{{ asset('back') }}/assets/css-rtl/sidemenu3.css">
 
     <!-- Style css -->
     <link href="{{ asset('back') }}/assets/css-rtl/style.css" rel="stylesheet">
@@ -38,11 +38,12 @@
 
     
     <!-- Maps css -->
-    <link href="{{ asset('back') }}/assets/plugins/jqvmap/jqvmap.min.css" rel="stylesheet">
+    {{-- <link href="{{ asset('back') }}/assets/plugins/jqvmap/jqvmap.min.css" rel="stylesheet"> --}}
+
 
     <!--- Select2 css --->
     <link href="{{ asset('back') }}/assets/plugins/select2/css/select2.min.css" rel="stylesheet">
-    
+
     <!-- Data table css -->
     <link href="{{ asset('back') }}/assets/plugins/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <link href="{{ asset('back') }}/assets/plugins/datatable/css/buttons.bootstrap4.min.css" rel="stylesheet">
@@ -62,6 +63,7 @@
     <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 
     @yield('header')
+    
 
     <!-- Skinmodes css -->
     <link href="{{ asset('back') }}/assets/css-rtl/skin-modes.css" rel="stylesheet" />
@@ -76,7 +78,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:slnt,wght@11,200..1000&family=Changa:wght@200..800&display=swap" rel="stylesheet">
-
+    
     <style>
         @font-face {
             font-family: "4_F4";
@@ -137,27 +139,8 @@
         .side-menu__label{
             font-size: 12.5px;
         }
-        .side-menu__label{
-            font-weight: bold !important;
-            color: #4a4444 !important;
-            font-size: 10.5px;
-        }
-
         .slide-item{
-            color: #b5b5b5 !important;
-            font-size: 10.5px;
-        }   
-
-        .app-sidebar .side-item.side-item-category{
-            font-size: 10.5px !important;
-            font-weight: bold !important;
-            color: #bf0001;
-        }
-
-        @media (min-width: 768px) {
-            .app.sidenav-toggled .side-menu__label {
-                font-size: 10.5px !important;
-            }
+            font-size: 11px;
         }
 
         /* ////////////////////////////////////////////  top css new css edit  ///////////////////////////////////////////////// */
@@ -249,112 +232,111 @@
     </style>
 </head>
 
-    <body class="main-body app sidebar-mini {{-- dark-theme --}}">
-    	
-        <!-- Start Switcher -->
+{{-- hoversubmenu main-body app sidebar-mini sidenav-toggled --}}
+<body class="hoversubmenu main-body app sidebar-mini sidenav-toggled  {{-- hoversubmenu main-body app sidebar-mini       dark-theme --}}">
+    
+    <!-- Start Switcher -->
         @include('back.layouts.switcher')
-        <!-- End Switcher -->
+    <!-- End Switcher -->
 
-        <!-- Loader -->
+    <!-- Loader -->
         <div id="global-loader">
             <img src="{{ asset('back') }}/assets/img/loader.svg" class="loader-img" alt="Loader">
         </div>
-        <!-- /Loader -->
+    <!-- /Loader -->
 
-        <!-- Page -->
+    <!-- Page -->
         <div class="page">
 
             <!-- main-sidebar -->
-            @include('back.layouts.sidebar')
-			<!-- main-sidebar -->
+                @include('back.layouts.sidebar')
+            <!-- end main-sidebar -->
 
             <!-- main-content -->
-			<div class="main-content app-content">
+            <div class="main-content app-content">
 
-                <!-- main-header -->
-                @include('back.layouts.navbar')
-				<!-- /main-header -->
-
+                <!-- main-navbar -->
+                    @include('back.layouts.navbar')
+                <!-- /main-navbar -->
 
                 <!-- container -->
-                @yield('content')				
-				<!-- Container closed -->
-			</div>
-			<!-- main-content closed -->
+                    @yield('content')
+                <!-- Container closed -->
+
+            </div>
+            <!-- main-content closed -->
 
             <!-- Sidebar-right-->
-            @include('back.layouts.right_sidebar')
-			<!--/Sidebar-right-->
+                @include('back.layouts.right_sidebar')
+            <!--/Sidebar-right-->
             
             <!-- Footer opened -->
-            @include('back.layouts.footer')
-			<!-- Footer closed -->
+                @include('back.layouts.footer')			
+            <!-- Footer closed -->
         </div>
-		<!-- End Page -->
+    <!-- End Page -->
 
+    <!-- Back-to-top -->
+    <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
 
+    <!-- JQuery min js -->
+    <script src="{{ asset('back') }}/assets/plugins/jquery/jquery.min.js"></script>
 
-        <!-- Back-to-top -->
-        <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+    <!-- Bootstrap js -->
+    <script src="{{ asset('back') }}/assets/plugins/bootstrap/js/popper.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/bootstrap/js/bootstrap-rtl.js"></script>
 
-        <!-- JQuery min js -->
-        <script src="{{ asset('back') }}/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Ionicons js -->
+    {{-- <script src="{{ asset('back') }}/assets/plugins/ionicons/ionicons.js"></script> --}}
 
-        <!-- Bootstrap js -->
-        <script src="{{ asset('back') }}/assets/plugins/bootstrap/js/popper.min.js"></script>
-        <script src="{{ asset('back') }}/assets/plugins/bootstrap/js/bootstrap-rtl.js"></script>
+    <!-- Moment js -->
+    {{-- <script src="{{ asset('back') }}/assets/plugins/moment/moment.js"></script> --}}
 
-        <!-- Ionicons js -->
-        {{-- <script src="{{ asset('back') }}/assets/plugins/ionicons/ionicons.js"></script> --}}
+    <!-- P-scroll js -->
+    <script src="{{ asset('back') }}/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/perfect-scrollbar/p-scroll-rtl.js"></script>
 
-        <!-- Moment js -->
-        {{-- <script src="{{ asset('back') }}/assets/plugins/moment/moment.js"></script> --}}
+    <!-- Sticky js -->
+    <script src="{{ asset('back') }}/assets/js/sticky.js"></script>
 
-        <!-- P-scroll js -->
-        <script src="{{ asset('back') }}/assets/plugins/perfect-scrollbar/perfect-scrollbar.min-rtl.js"></script>
-        <script src="{{ asset('back') }}/assets/plugins/perfect-scrollbar/p-scroll-rtl.js"></script>
+    <!-- eva-icons js -->
+    {{-- <script src="{{ asset('back') }}/assets/js/eva-icons.min.js"></script> --}}
 
-        <!-- Sticky js -->
-        <script src="{{ asset('back') }}/assets/js/sticky.js"></script>
+    <!-- Horizontalmenu js-->
+    <script src="{{ asset('back') }}/assets/plugins/horizontal-menu/horizontal-menu-2/horizontal-menu.js"></script>
 
-        <!-- eva-icons js -->
-        {{-- <script src="{{ asset('back') }}/assets/js/eva-icons.min.js"></script> --}}
+    <!-- Rating js-->
+    {{-- <script src="{{ asset('back') }}/assets/plugins/rating/jquery.rating-stars.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/rating/jquery.barrating.js"></script> --}}
 
-        <!-- Horizontalmenu js-->
-        <script src="{{ asset('back') }}/assets/plugins/horizontal-menu/horizontal-menu-2/horizontal-menu.js"></script>
+    <!-- Sidebar js -->
+    <script src="{{ asset('back') }}/assets/plugins/side-menu/sidemenu1.js"></script>
 
-        <!-- Rating js-->
-        {{-- <script src="{{ asset('back') }}/assets/plugins/rating/jquery.rating-stars.js"></script>
-        <script src="{{ asset('back') }}/assets/plugins/rating/jquery.barrating.js"></script> --}}
+    <!-- Right-sidebar js -->
+    <script src="{{ asset('back') }}/assets/plugins/sidebar/sidebar-rtl.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/sidebar/sidebar-custom.js"></script>
 
-        <!-- Sidebar js -->
-        <script src="{{ asset('back') }}/assets/plugins/side-menu/sidemenu.js"></script>
+    
+    <!--Internal  Chart.bundle js -->
+    <script src="{{ asset('back') }}/assets/plugins/chart.js/Chart.bundle.min.js"></script>
 
-        <!-- Right-sidebar js -->
-        <script src="{{ asset('back') }}/assets/plugins/sidebar/sidebar-rtl.js"></script>
-        <script src="{{ asset('back') }}/assets/plugins/sidebar/sidebar-custom.js"></script>
+    <!--Internal Sparkline js -->
+    <script src="{{ asset('back') }}/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
 
-        
-		<!--Internal  Chart.bundle js -->
-		<script src="{{ asset('back') }}/assets/plugins/chart.js/Chart.bundle.min.js"></script>
+    <!-- Raphael js -->
+    <script src="{{ asset('back') }}/assets/plugins/raphael/raphael.min.js"></script>
 
-		<!--Internal Sparkline js -->
-		<script src="{{ asset('back') }}/assets/plugins/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Internal Apexchart js-->
+    {{-- <script src="{{ asset('back') }}/assets/js/apexcharts.js"></script> --}}
 
-		<!-- Raphael js -->
-		<script src="{{ asset('back') }}/assets/plugins/raphael/raphael.min.js"></script>
-
-		<!--Internal Apexchart js-->
-		{{-- <script src="{{ asset('back') }}/assets/js/apexcharts.js"></script> --}}
-
-		<!-- Internal Map -->
-		{{-- <script src="{{ asset('back') }}/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
-		<script src="{{ asset('back') }}/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> --}}
-
-		<!--Internal  index js -->
-		<script src="{{ asset('back') }}/assets/js/index.js"></script>
-		{{-- <script src="{{ asset('back') }}/assets/js/jquery.vmap.sampledata.js"></script> --}}
-		
+    <!-- Internal Map -->
+    {{-- <script src="{{ asset('back') }}/assets/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="{{ asset('back') }}/assets/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+ --}}
+    <!--Internal  index js -->
+    <script src="{{ asset('back') }}/assets/js/index.js"></script>
+    {{-- <script src="{{ asset('back') }}/assets/js/jquery.vmap.sampledata.js"></script> --}}
+    
     <!--Internal  Datepicker js -->
     <script src="{{ asset('back') }}/assets/plugins/jquery-ui/ui/widgets/datepicker.js"></script>
 
@@ -403,6 +385,6 @@
     <script src="{{ asset('back') }}/assets/js/custom.js"></script>
 
     <!-- Switcher js -->
-	<script src="{{ asset('back') }}/assets/switcher/js/switcher-rtl.js"></script>
+<script src="{{ asset('back') }}/assets/switcher/js/switcher-rtl.js"></script>
 </body>
 </html>

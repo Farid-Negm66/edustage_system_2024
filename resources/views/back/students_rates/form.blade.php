@@ -1,5 +1,5 @@
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static">
-    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle"></h5>
@@ -14,16 +14,28 @@
                 <input type="hidden" id="res_id" value="" />               
 
                 <div class="pd-30 pd-sm-40 bg-gray-100">
-                    <div class="row row-xs">
-
-                        <div class="col-md-12">
-                            <label for="name">اسم الوحدة</label>
-                            <i class="fas fa-star require_input"></i>
-                            <div>
-                                <input type="text" class="form-control dataInput" placeholder="اسم الوحدة" id="name" name="name" data-autofocus>
-                            </div>
-                            <bold class="text-danger" id="errors-name" style="display: none;"></bold>
-                        </div>                        
+                    <div class="row row-xs">                 
+                      <div class="col-md-12">
+                        <label for="time">الوقت</label>
+                        <i class="fas fa-star require_input"></i>
+                        <div>
+                            <input type="text" class="form-control datePicker dataInput" placeholder="الوقت" id="time" name="time" value="">
+                        </div>
+                        <bold class="text-danger" id="errors-time" style="display: none;"></bold>
+                      </div>    
+                      
+                      <div class="col-md-12">
+                        <label for="am_pm">صباحاً/مساءاً</label>
+                        <i class="fas fa-star require_input"></i>
+                        <div>
+                            <select id="am_pm" name="am_pm" class="form-control">
+                              <option value="ص" selected>صباحاً</option>
+                              <option value="م">مساءاً</option>
+                            </select>
+                        </div>
+                        <bold class="text-danger" id="errors-am_pm" style="display: none;"></bold>
+                      </div>        
+                    
                     </div>
                 </div>
 

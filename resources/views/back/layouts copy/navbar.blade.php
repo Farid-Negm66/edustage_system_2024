@@ -2,17 +2,17 @@
     <div class="container-fluid">
         <div class="main-header-left ">
             <div class="responsive-logo">
-                <a href="index.html"><img src="{{ asset('back') }}/assets/img/brand/logo.png" class="logo-1" alt="logo"></a>
-                <a href="index.html"><img src="{{ asset('back') }}/assets/img/brand/logo-white.png" class="dark-logo-1" alt="logo"></a>
-                <a href="index.html"><img src="{{ asset('back') }}/assets/img/brand/favicon.png" class="logo-2" alt="logo"></a>
-                <a href="index.html"><img src="{{ asset('back') }}/assets/img/brand/favicon.png" class="dark-logo-2" alt="logo"></a>
+                <a href="{{ asset('back') }}/pages/index.html"><img src="{{ asset('back') }}/assets/img/brand/logo.png" class="logo-1" alt="logo"></a>
+                <a href="{{ asset('back') }}/pages/index.html"><img src="{{ asset('back') }}/assets/img/brand/logo-white.png" class="dark-logo-1" alt="logo"></a>
+                <a href="{{ asset('back') }}/pages/index.html"><img src="{{ asset('back') }}/assets/img/brand/favicon.png" class="logo-2" alt="logo"></a>
+                <a href="{{ asset('back') }}/pages/index.html"><img src="{{ asset('back') }}/assets/img/brand/favicon.png" class="dark-logo-2" alt="logo"></a>
             </div>
             <div class="app-sidebar__toggle" data-toggle="sidebar">
                 <a class="open-toggle" href="#"><i class="header-icon fe fe-align-left" ></i></a>
                 <a class="close-toggle" href="#"><i class="header-icons fe fe-x"></i></a>
             </div>
             <div class="main-header-center mr-3 m-0 d-sm-none d-md-none d-lg-block">
-                <input class="form-control" placeholder="بحث..." type="search"> <button class="btn"><i class="fas fa-search d-none d-md-block"></i></button>
+                <input class="form-control" placeholder="Search for anything..." type="search"> <button class="btn"><i class="fas fa-search d-none d-md-block"></i></button>
             </div>
             <a class="animated-arrow hor-header-toggle horizontal-navtoggle"><span></span></a><!-- sidebar-toggle-->
             <div class="horizontal-main header-layout">
@@ -20,15 +20,91 @@
                     <nav class="horizontalMenu clearfix">
                         <ul class="horizontalMenu-list">
                             <li aria-haspopup="true">
-                                <a class="sub-icon">
+                                <a class="sub-icon" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                                 
-                                إختصارات <i class="fe fe-chevron-down horizontal-icon"></i></a>
+                                Layouts <i class="fe fe-chevron-down horizontal-icon"></i></a>
                                 <ul class="sub-menu">
-                                    <li aria-haspopup="true"><a href="{{ url('time_table') }}" class="slide-item">جدول الحصص</a></li>
-                                    <li aria-haspopup="true"><a href="{{ url('time_table') }}" class="slide-item">تقيمات الطلاب</a></li>
-
-                                   
+                                    <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Vertical Menu</a>
+                                        <ul class="sub-menu">
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Leftmenu-Icon</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icon-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icon-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icon-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icon-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Leftmenu-Icontext</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icontext-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icontext-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icontext-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/icontext-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Leftmenu-Iconoverlay</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/iconoverlay-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/iconoverlay-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/iconoverlay-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/iconoverlay-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Leftmenu-Closed</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/closed-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/closed-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/closed-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/closed-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Leftmenu-Toggle</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/toggle-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/toggle-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/toggle-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/toggle-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Hoversubmenu</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Hoversubmenu-style</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-style-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-style-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-style-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/hoversubmenu-style-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Horizontal Menu</a>
+                                        <ul class="sub-menu">
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Horizontal</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/horizontal-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/horizontal-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/horizontal-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/horizontal-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                            <li aria-haspopup="true" class="sub-menu-sub"><a href="#">Centerlogo</a>
+                                                <ul class="sub-menu">
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/centerlogo-light.html" class="slide-item">Light</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/centerlogo-light-boxed.html" class="slide-item">Light-Boxed</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/centerlogo-dark.html" class="slide-item">Dark</a></li>
+                                                    <li aria-haspopup="true"><a href="{{ asset('back') }}/pages/centerlogo-dark-boxed.html" class="slide-item">Dark-Boxed</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -37,7 +113,7 @@
             </div>
         </div>
         <div class="main-header-right">
-            {{-- <ul class="nav">
+            <ul class="nav">
                 <li class="">
                     <div class="dropdown  nav-itemd-none d-md-flex">
                         <a href="#" class="d-flex  nav-item nav-link pl-0 country-flag1" data-toggle="dropdown" aria-expanded="false">
@@ -80,11 +156,9 @@
                         </div>
                     </div>
                 </li>
-            </ul> --}}
-
-
+            </ul>
             <div class="nav nav-item  navbar-nav-right ml-auto">
-                {{-- <div class="nav-link" id="bs-example-navbar-collapse-1">
+                <div class="nav-link" id="bs-example-navbar-collapse-1">
                     <form class="navbar-form" role="search">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search">
@@ -98,20 +172,7 @@
                             </span>
                         </div>
                     </form>
-                </div> --}}
-
-                <div class="nav-item dark_theme">
-                    <a class="new nav-link full-screen-link"style="font-size: 19px;cursor: pointer;position: relative;top: 5px;">
-                        <i class="fas fa-moon"></i>    
-                    </a>
                 </div>
-                
-                <div class="nav-item light_theme" style="display: none;">
-                    <a class="new nav-link full-screen-link" style="font-size: 19px;color: #eec706;cursor: pointer;position: relative;top: 5px;">
-                        <i class="fas fa-sun"></i>    
-                    </a>
-                </div>
-
                 <div class="dropdown nav-item main-header-message ">
                     <a class="new nav-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="header-icon-svgs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg><span class=" pulse-danger"></span></a>
                     <div class="dropdown-menu">
@@ -123,7 +184,7 @@
                             <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">You have 4 unread messages</p>
                         </div>
                         <div class="main-message-list chat-scroll">
-                            <a href="chat.html" class="p-3 d-flex border-bottom">
+                            <a href="{{ asset('back') }}/pages/chat.html" class="p-3 d-flex border-bottom">
                                 <div class="  drop-img  cover-image  " data-image-src="{{ asset('back') }}/assets/img/faces/3.jpg">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
@@ -135,7 +196,7 @@
                                     <p class="time mb-0 text-left float-right mr-2 mt-2">Mar 15 3:55 PM</p>
                                 </div>
                             </a>
-                            <a href="chat.html" class="p-3 d-flex border-bottom">
+                            <a href="{{ asset('back') }}/pages/chat.html" class="p-3 d-flex border-bottom">
                                 <div class="drop-img cover-image" data-image-src="{{ asset('back') }}/assets/img/faces/2.jpg">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
@@ -147,7 +208,7 @@
                                     <p class="time mb-0 text-left float-right mr-2 mt-2">Mar 06 01:12 AM</p>
                                 </div>
                             </a>
-                            <a href="chat.html" class="p-3 d-flex border-bottom">
+                            <a href="{{ asset('back') }}/pages/chat.html" class="p-3 d-flex border-bottom">
                                 <div class="drop-img cover-image" data-image-src="{{ asset('back') }}/assets/img/faces/9.jpg">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
@@ -159,7 +220,7 @@
                                     <p class="time mb-0 text-left float-right mr-2 mt-2">Feb 25 10:35 AM</p>
                                 </div>
                             </a>
-                            <a href="chat.html" class="p-3 d-flex border-bottom">
+                            <a href="{{ asset('back') }}/pages/chat.html" class="p-3 d-flex border-bottom">
                                 <div class="drop-img cover-image" data-image-src="{{ asset('back') }}/assets/img/faces/12.jpg">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
@@ -171,7 +232,7 @@
                                     <p class="time mb-0 text-left float-right mr-2 mt-2">Feb 12 05:12 PM</p>
                                 </div>
                             </a>
-                            <a href="chat.html" class="p-3 d-flex border-bottom">
+                            <a href="{{ asset('back') }}/pages/chat.html" class="p-3 d-flex border-bottom">
                                 <div class="drop-img cover-image" data-image-src="{{ asset('back') }}/assets/img/faces/5.jpg">
                                     <span class="avatar-status bg-teal"></span>
                                 </div>
@@ -293,12 +354,12 @@
                                 </div>
                             </div>
                         </div>
-                        <a class="dropdown-item" href="profile.html"><i class="bx bx-user-circle"></i>Profile</a>
-                        <a class="dropdown-item" href="editprofile.html"><i class="bx bx-cog"></i> Edit Profile</a>
-                        <a class="dropdown-item" href="mail-compose.html"><i class="bx bxs-inbox"></i>Inbox</a>
-                        <a class="dropdown-item" href="mail.html"><i class="bx bx-envelope"></i>Messages</a>
-                        <a class="dropdown-item" href="mail-settings.html"><i class="bx bx-slider-alt"></i> Account Settings</a>
-                        <a class="dropdown-item" href="signin.html"><i class="bx bx-log-out"></i> Sign Out</a>
+                        <a class="dropdown-item" href="{{ asset('back') }}/pages/profile.html"><i class="bx bx-user-circle"></i>Profile</a>
+                        <a class="dropdown-item" href="{{ asset('back') }}/pages/editprofile.html"><i class="bx bx-cog"></i> Edit Profile</a>
+                        <a class="dropdown-item" href="{{ asset('back') }}/pages/mail-compose.html"><i class="bx bxs-inbox"></i>Inbox</a>
+                        <a class="dropdown-item" href="{{ asset('back') }}/pages/mail.html"><i class="bx bx-envelope"></i>Messages</a>
+                        <a class="dropdown-item" href="{{ asset('back') }}/pages/mail-settings.html"><i class="bx bx-slider-alt"></i> Account Settings</a>
+                        <a class="dropdown-item" href="{{ asset('back') }}/pages/signin.html"><i class="bx bx-log-out"></i> Sign Out</a>
                     </div>
                 </div>
                 <div class="dropdown main-header-message right-toggle">

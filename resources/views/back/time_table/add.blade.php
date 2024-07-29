@@ -39,7 +39,7 @@
                     // start after success remove all times and append this
 
                     
-                    $("#group_id")[0].selectize.clear();
+                    $("#exampleModalCenter #group_id")[0].selectize.clear();
 
 
                     // $('#satDataTable').DataTable().ajax.reload();                

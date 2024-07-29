@@ -1,0 +1,126 @@
+<?php
+
+namespace App\Http\Controllers\Back;
+
+use App\Http\Controllers\Controller;
+use App\Models\Back\StudentsRates;
+use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\DB;
+
+class StudentsRatesController extends Controller
+{
+   public function index()
+    {                               
+        $pageNameAr = 'المجموعات التعليمة';
+        $pageNameEn = 'students_rates';
+        $teachers = DB::table('tbl_teachers')->orderBy('TheName', 'asc')->get();
+        
+        return view('back.students_rates.index' , compact('pageNameAr' , 'pageNameEn', 'teachers'));
+    }
+
+    public function get_groups_by_teacher_date($fromtDate, $toDate, $teacher)
+    {                               
+        $find = DB::table('tbl_groups')->where('TeacherID', $teacher)->whereBetween('OpenDate', [$fromtDate, $toDate])->get();
+        return response()->json($find);
+    }
+
+    public function store(Request $request)
+    {
+        if (request()->ajax()){
+            $time = $request->input('time');
+            $amPm = $request->input('am_pm');
+            
+            if(StudentsRates::where('time', $time)->exists() && StudentsRates::where('am_pm', $amPm)->exists()){
+                return response()->json(['status' => 'error', 'message' => 'هذا الوقت
+                موجود بالفعل']);
+            }
+
+
+
+            $this->validate($request , [
+                'time' => 'required|unique:times,time',
+                'order' => 'required|integer',
+            ],[
+                'required' => ':attribute مطلوب.',
+                'integer' => ':attribute غير صحيح.',
+                'unique' => ':attribute مستخدم من قبل.',
+            ],[
+                'time' => 'الوقت',
+                'order' => 'ترتيب الوقت',
+            ]);
+
+            $time = StudentsRates::create($request->all());
+            return response()->json(['responseLastId' => ($time->order) + 1]);
+        }
+    }
+
+    public function edit($id)
+    {
+        if(request()->ajax()){
+            $find = StudentsRates::where('id', $id)->first();
+            return response()->json($find);
+        }
+        return view('back.welcome');
+    }
+
+    public function update(Request $request, $id)
+    {
+        if (request()->ajax()){
+            $find = StudentsRates::where('id', $id)->first();
+            
+            $this->validate($request , [
+                'time' => 'required|unique:times,time,'.$id,
+                'order' => 'required|integer',
+            ],[
+                'required' => ':attribute مطلوب.',
+                'integer' => ':attribute غير صحيح.',
+                'unique' => ':attribute مستخدم من قبل.',
+            ],[
+                'time' => 'الوقت',
+                'order' => 'ترتيب الوقت',
+            ]);
+
+            
+            $find->update($request->all());
+        }
+    }
+
+     
+    public function destroy($id)
+    {
+        if(request()->ajax()){
+            $find = StudentsRates::where('id', $id)->first();
+            $find->delete();
+        }
+        return view('back.welcome');
+    }
+
+
+    public function datatable()
+    {
+        $all = StudentsRates::orderBy('am_pm', 'asc')->orderBy('order', 'asc')->get();
+
+        return DataTables::of($all)
+            ->addColumn('time', function($res){
+                return $res->time. ' '. $res->am_pm;
+            })      
+            ->addColumn('order', function($res){
+                return $res->order;
+            })      
+            
+            ->addColumn('action', function($res){
+                return '
+                    <button type="button" class="btn btn-sm btn-outline-primary edit" data-effect="effect-scale" data-toggle="modal" href="#exampleModalCenter" data-placement="top" data-toggle="tooltip" title="تعديل" res_id="'.$res->id.'">
+                        <i class="fas fa-marker"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-sm btn-outline-danger delete dbtn" data-placement="top" data-toggle="tooltip" title="حذف" res_id="'.$res->id.'">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                ';
+            })
+            ->rawColumns(['time', 'am_pm', 'order', 'action'])
+            ->toJson();
+    }
+}

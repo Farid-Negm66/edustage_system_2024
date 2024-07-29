@@ -7,7 +7,7 @@
 
             
             $.ajax({
-                url: "{{ url($pageNameEn) }}/store",
+                url: "{{ url('times/store') }}",
                 type: 'POST',
                 processData: false,
                 contentType: false,
@@ -33,6 +33,7 @@
                     $(".modal form bold[class=text-danger]").css('display', 'none');
             
                     $(".dataInput").val('');
+                    $("#order").val(res.responseLastId);
                     $('.dataInput:first').select().focus();
 
                     document.querySelector('.modal #save').disabled = false;

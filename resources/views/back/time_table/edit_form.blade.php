@@ -19,7 +19,7 @@
                 <input type="hidden" id="group_to_colspan_res" /> 
                 
                 
-                <div class="pd-30 pd-sm-40" style="background-image: linear-gradient(to right, #c9b5d7 0, #cecece 100%) !important;">
+                <div class="pd-30 pd-sm-40" style="background-image: linear-gradient(to right, #9aba99 0, #ebf2a8 100%) !important;">
                     <div class="row row-xs">                   
                         <div class="col-lg-4">
                             <div class="col-xs-12">
@@ -73,7 +73,7 @@
                                 <label for="user">مستخدم</label>
                                 <i class="fas fa-star require_input"></i>
                                 <div>
-                                    <select class="form-control user" name="user" id="user" required>
+                                    <select class="form-control user" name="user" id="user" required style="font-size: 17px;font-weight: bold;">
                                         <option value="1" style="font-size: 16px !important;font-weight: bold !important;">1 (*)</option>                                            
                                         <option value="2" style="font-size: 16px !important;font-weight: bold !important;">2 (#)</option>                                            
                                     </select>
