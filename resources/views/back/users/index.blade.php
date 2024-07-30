@@ -10,6 +10,19 @@
     <link href="{{ url('back') }}/assets/plugins/sweet-alert/sweetalert.css" rel="stylesheet">
     {{-- fileupload --}}
     <link href="{{ asset('back/assets/file-upload-with-preview.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <style>
+        @media (min-width: 768px){
+
+            .modal-xl {
+                max-width: 95%;
+            }
+        }
+        hr{
+            border-top: 2px solid #4d5276;
+            margin: 32px 0px 24px;
+        }
+    </style>
 @endsection
 
 @section('footer')  
@@ -32,8 +45,6 @@
                 $('.dataInput').val('');
             }
         });
-
-
 
 
         // remove all errors and inputs data when close modal
