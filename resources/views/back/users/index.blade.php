@@ -75,10 +75,12 @@
                 dataType: 'json',
                 columns: [
                     {data: 'id', name: 'id'},
+                    {data: 'image', name: 'image'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'gender', name: 'gender'},
-                    {data: 'address', name: 'address'},
+                    {data: 'phone', name: 'phone'},
+                    {data: 'user_role', name: 'user_role'},
                     {data: 'status', name: 'status'},
                     {data: 'action', name: 'action', orderable: false},
                 ],
@@ -127,10 +129,12 @@
                                 <thead>
                                     <tr>
                                         <th class="wd-15p border-bottom-0">#</th>
+                                        <th class="wd-15p border-bottom-0">الصورة</th>
                                         <th class="wd-15p border-bottom-0" style="width: 20%;">الإسم</th>
                                         <th class="wd-20p border-bottom-0" style="width: 20%;">الإيميل</th>
                                         <th class="wd-20p border-bottom-0">النوع</th>
-                                        <th class="wd-15p border-bottom-0" style="width: 35%;">العنوان</th>
+                                        <th class="wd-15p border-bottom-0">موبايل</th>
+                                        <th class="wd-15p border-bottom-0">التراخيص</th>
                                         <th class="wd-10p border-bottom-0">الحالة</th>
                                         <th class="wd-25p border-bottom-0">التحكم</th>
                                     </tr>

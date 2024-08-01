@@ -130,22 +130,7 @@
                             <bold class="text-danger" id="errors-note" style="display: none;"></bold>
                         </div>
                     </div>  
-                    {{-- <hr> --}}
-
-                    <br><br>
-                    <div class="modal-footer bg bg-dark">                                               
-                        <button type="button" id="save" class="btn btn-success" style="display: none;">
-                            حفظ
-                            <span class="spinner-border spinner-border-sm spinner_request" role="status" aria-hidden="true"></span>
-                          </button>
-      
-                          <button type="button" id="update" class="btn btn-success" style="display: none;">
-                            تعديل
-                            <span class="spinner-border spinner-border-sm spinner_request2" role="status" aria-hidden="true"></span>
-                          </button>
-                          
-                          <button id="closeModal" type="button" class="btn btn-light" data-dismiss="modal">اغلاق</button>
-                    </div>
+                    {{-- <hr> --}}                    
 
                     <div class="row row-xs">
                         <div class="col-md-8">
@@ -174,8 +159,24 @@
                     </div>
                   </div>
 
+                  <div class="modal-footer bg bg-dark">                                               
+                      <button type="button" id="save" class="btn btn-success" style="display: none;">
+                          حفظ
+                          <span class="spinner-border spinner-border-sm spinner_request" role="status" aria-hidden="true"></span>
+                        </button>
+          
+                        <button type="button" id="update" class="btn btn-success" style="display: none;">
+                          تعديل
+                          <span class="spinner-border spinner-border-sm spinner_request2" role="status" aria-hidden="true"></span>
+                        </button>
+                        
+                        <button id="closeModal" type="button" class="btn btn-light" data-dismiss="modal">اغلاق</button>
+                  </div>
             </form>            
+            
         </div>
+
+
       </div>
     </div>
 </div>

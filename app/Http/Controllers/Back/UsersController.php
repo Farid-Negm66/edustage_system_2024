@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use App\Models\Back\User;
+use App\Models\Back\Admin;
 use App\Models\Back\RolesPermissions;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 use Intervention\Image\ImageManagerStatic as Image;
 use Intervention\Image\ImageManager;
@@ -20,7 +19,7 @@ use Intervention\Image\Drivers\Imagick\Driver;
 class UsersController extends Controller
 {
     public function index()
-    {
+    {    
         $pageNameAr = 'المستخدمين';
         $pageNameEn = 'users';
         // $permissions = RolesPermissions::all();
@@ -32,15 +31,15 @@ class UsersController extends Controller
 
         if (request()->ajax()){
             $this->validate($request , [
-                'name' => 'required|string',
+                'name' => 'required|string|max:250|unique:users,name',
                 'email' => 'required|unique:users,email',
                 'birth_date' => 'nullable|date' ,
-                'phone' => 'required|numeric',
+                'phone' => 'nullable|numeric|unique:users,phone',
                 'address' => 'required|string',
                 'nat_id' => 'nullable|min:14|numeric|unique:users,nat_id',    
                 'password' => 'required|min:6',
                 'confirmed_password' => 'required|min:6|same:password',
-                'role' => 'required',
+                'user_role' => 'required',
                 'image' => 'nullable|mimes:jpeg,jpg,png,gif|max:1500',
             ],[
                 'required' => ':attribute مطلوب.',
@@ -209,10 +208,24 @@ class UsersController extends Controller
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public function datatable()
     {
-        $all = User::where('user_status', 1)->get();
+        $all = User::where('user_status', 1)
+                    ->leftJoin('admins', 'admins.user_id', 'users.id')
+                    ->select(
+                        'users.id', 'users.name', 'users.email', 'users.user_status', 'users.user_role',
+                        'admins.gender', 'admins.phone', 'admins.birth_date', 'admins.image', 'admins.active', 'admins.address', 'admins.notes'
+                    )
+                    ->orWhere('users.user_status', 2)
+                    ->get();
         return DataTables::of($all)
+            ->addColumn('image', function($res){
+                return '
+                    <a class="spotlight" href="'.url('back/images/users/'.$res['image']).'">
+                        <img src="'.url('back/images/users/'.$res['image']).'" alt="'.$res['text'].'" style="width: 25px;height: 25px;border-radius: 5px;margin: 0px auto;display: block;">
+                    </a>
+                ';
+            })
             ->addColumn('status', function($res){
-                if($res->status == 1){
+                if($res->active == 1){
                     return '<span class="label text-success" style="position: relative;"><div class="dot-label bg-success ml-1" style="position: absolute;right: -17px;top: 7px;"></div>نشط</span>';
                 }
                 else{
@@ -240,7 +253,7 @@ class UsersController extends Controller
                 // </button>
 
             })
-            ->rawColumns(['status', 'gender', 'action'])
+            ->rawColumns(['image', 'status', 'gender', 'action'])
             ->toJson();
     }
 

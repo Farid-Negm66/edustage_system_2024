@@ -36,7 +36,6 @@
     <link href="{{ asset('back') }}/assets/css-rtl/style.css" rel="stylesheet">
     <link href="{{ asset('back') }}/assets/css-rtl/style-dark.css" rel="stylesheet">
 
-    
     <!-- Maps css -->
     <link href="{{ asset('back') }}/assets/plugins/jqvmap/jqvmap.min.css" rel="stylesheet">
 
@@ -61,6 +60,10 @@
     {{-- flatpickr --}}
     <link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
 
+    {{-- spotlight --}}
+    <link href="{{ asset('back/assets/spotlight.min.css') }}" rel="stylesheet" type="text/css" />
+
+    
     @yield('header')
 
     <!-- Skinmodes css -->
@@ -386,16 +389,20 @@
     <!-- alertify -->
     <script src="{{ asset('back/assets/js/alertify.min.js') }}"></script>
 
+    
     {{-- general scripts file js --}}
     @include('back.layouts.general_scripts')
 
-	
 
     {{-- selectize --}}
     <script src="{{ asset('back/assets/selectize.min.js') }}"></script>
     
     {{-- flatpickr --}}
     <script src="https://unpkg.com/flatpickr/dist/flatpickr.min.js"></script>
+
+    <!-- spotlight -->
+    <script src="{{ asset('back/assets/spotlight.bundle.js') }}"></script>
+    <script src="{{ asset('back/assets/spotlight.min.js') }}"></script>
 
     @yield('footer')
 
