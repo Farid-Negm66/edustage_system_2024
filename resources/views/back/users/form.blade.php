@@ -14,7 +14,6 @@
                 <input type="hidden" id="res_id" value="" />               
 
                 <div class="pd-30 pd-sm-40 bg-gray-100">
-                    {{-- <h5 style="text-decoration: underline;font-weight: bold;">بيانات أساسية</h5> --}}
                     <div class="row row-xs">
                         <div class="col-md-3 col-xs-12">
                             <label for="name">اسم المستخدم</label>
@@ -29,7 +28,7 @@
                             <label for="email">البريد الإلكتروني</label>
                             <i class="fas fa-star require_input"></i>
                             <div>
-                                <input type="email" class="form-control dataInput" placeholder="مهم جدا لتسجيل الدخول" id="email" name="email">
+                                <input type="email" class="form-control dataInput" placeholder="البريد الإلكتروني" id="email" name="email">
                             </div>
                             <bold class="text-danger" id="errors-email" style="display: none;"></bold>
                         </div>
@@ -65,7 +64,6 @@
 
                         <div class="col-lg-2 col-md-3 col-xs-12">
                             <label for="phone">رقم التليفون</label>
-                            <i class="fas fa-star require_input"></i>
                             <div>
                                 <input type="number" class="form-control dataInput" placeholder="رقم التليفون" id="phone" name="phone">
                             </div>
@@ -89,26 +87,26 @@
                         </div>
                        
                         <div class="col-lg-2 col-md-3 col-xs-12">
-                            <label for="status">الحالة</label>
+                            <label for="active">الحالة</label>
                             <div>    
-                                <select  name="status" class="form-control status" id="status">
+                                <select  name="active" class="form-control active" id="active">
                                     <option value="1">نشط</option>
                                     <option value="0">معطل</option>
                                 </select>
                             </div>
-                            <bold class="text-danger" id="errors-status" style="display: none;"></bold>
+                            <bold class="text-danger" id="errors-active" style="display: none;"></bold>
                         </div>
 
                         <div class="col-lg-2 col-md-3 col-xs-12">
-                            <label for="role">التراخيص </label>
+                            <label for="user_role">التراخيص </label>
                             <i class="fas fa-star require_input"></i>
                             <div>
-                                <select id="role" name="role"  class="form-control dataInput">
+                                <select id="user_role" name="user_role"  class="form-control dataInput">
                                     <option value="" selected disabled>---</option>
                                     <option value="1">admin</option>
                                 </select>
                             </div>
-                            <bold class="text-danger" id="errors-role" style="display: none;"></bold>
+                            <bold class="text-danger" id="errors-user_role" style="display: none;"></bold>
                         </div>  
 
                     </div>
@@ -123,27 +121,27 @@
                         </div>                                   
                         
                         <div class="col-lg-4 col-xs-12">
-                            <label for="note">ملاحظات</label>
+                            <label for="notes">ملاحظات</label>
                             <div>    
-                                <input type="text" class="form-control dataInput" placeholder="ملاحظات" id="note" name="note">
+                                <input type="text" class="form-control dataInput" placeholder="ملاحظات" id="notes" name="notes">
                             </div>
-                            <bold class="text-danger" id="errors-note" style="display: none;"></bold>
+                            <bold class="text-danger" id="errors-notes" style="display: none;"></bold>
                         </div>
                     </div>  
                     {{-- <hr> --}}                    
 
                     <div class="row row-xs">
-                        <div class="col-md-8">
+                        <div class="col-md-8" id="file_upload">
                             <div class="custom-file-container fileinput_fileinput" data-upload-id="file_upload" style="margin-top: 12px;">
                                 <label style="color: #555;"> صورة
-                                    <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">
+                                    <a href="javascript:void(0)" class="custom-file-container__image-clear clear_image" title="Clear Image">
                                         <i class="fa fa-trash-alt" style="color: rgb(221, 7, 7);font-size: 15px;position: relative;top: 3px;margin: 0px 15px 10px;"></i>
                                     </a>
                                 </label>
                                 <label class="custom-file-container__custom-file" >
                                     <input type="file" class="custom-file-container__custom-file__custom-file-input dataInput" name="image">
                                     <input type="hidden" name="image_hidden" id="image_hidden"/>
-                                    <span class="custom-file-container__custom-file__custom-file-control text-center" style="background: #fff;font-size: 12px;"></span>
+                                    <span class="custom-file-container__custom-file__custom-file-control heading_title text-center" style="background: #fff;font-size: 12px;"></span>
                                 </label>
 
                                 <div id="custom-file-container__image-preview">
@@ -154,7 +152,7 @@
                         </div>
                         
                         <div class="col-md-4">
-                            <img id="image_preview_form" class="img-responsive" src="{{ url('back/images/users/df_image.png') }}" />
+                            <img id="image_preview_form" class="img-responsive img-thumbnail" src="{{ url('back/images/users/df_image.png') }}" />
                         </div>
                     </div>
                   </div>

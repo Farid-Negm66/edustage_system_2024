@@ -14,7 +14,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Intervention\Image\ImageManagerStatic as Image;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Imagick\Driver;
-
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -34,9 +34,8 @@ class UsersController extends Controller
                 'name' => 'required|string|max:250|unique:users,name',
                 'email' => 'required|unique:users,email',
                 'birth_date' => 'nullable|date' ,
-                'phone' => 'nullable|numeric|unique:users,phone',
-                'address' => 'required|string',
-                'nat_id' => 'nullable|min:14|numeric|unique:users,nat_id',    
+                'phone' => 'nullable|numeric|unique:admins,phone',
+                'nat_id' => 'nullable|min:14|numeric|unique:admins,nat_id',    
                 'password' => 'required|min:6',
                 'confirmed_password' => 'required|min:6|same:password',
                 'user_role' => 'required',
@@ -52,31 +51,19 @@ class UsersController extends Controller
                 'same' => ':attribute غير مطابقة مع كلمة المرور.',
                 'mimes' => ':attribute يجب أن تكون من نوع JPG أو PNG أو JPEG أو GIF.',
                 'max' => ':attribute حجمها كبير.',
-                // 'numbers' => ':attribute القيمة المطلوبة رقم.',
-                // 'symbols' => ':attribute القيمة المطلوبة رموز.',
             ],[
                 'name' => 'إسم المستخدم',
                 'email' => 'البريد الإلكتروني',
                 'birth_date' => 'تاريخ الميلاد',
                 'phone' => 'التليفون',
-                'role' => 'تراخيص المستخدم',
+                'user_role' => 'تراخيص المستخدم',
                 'address' => 'العنوان',
                 'nat_id' => 'الرقم القومي',
                 'password' => 'كلمة المرور',
                 'confirmed_password' => 'تأكيد كلمة المرور',         
-                'image' => 'الصورة',                
+                'image' => 'صورة المستخدم',                
        
-            ]);
-
-            if($request->hasFile('image')){
-                $file = request('image');
-                $name = time() . '.' .$file->getClientOriginalExtension();
-                $path = public_path('back/images/users');
-                $file->move($path , $name);
-            }
-            else{
-                $name = "df_image.png";
-            }
+            ]);            
 
 
 
@@ -91,23 +78,42 @@ class UsersController extends Controller
             //     $name = "df_image.png";
             // }
 
-            
-            User::create([
-                'name' => request('name'),
-                'email' => request('email'),
-                'password' => Hash::make(request('password')),
-                'phone' => request('phone'),
-                'role' => request('role'),
-                'address' => request('address'),
-                'nat_id' => request('nat_id'),
-                'birth_date' => request('birth_date'),
-                'image' => $name,
-                'gender' => request('gender'),
-                'status' => request('status'),
-                'user_status' => 1,
-                'last_login_time' => request('last_login_time'),
-                'note' => request('note')
-            ]);
+            // start db transaction to store 
+            DB::transaction(function(){
+                if(request()->hasFile('image')){
+                    $file = request('image');
+                    $name = time() . '.' .$file->getClientOriginalExtension();
+                    $path = public_path('back/images/users');
+                    $file->move($path , $name);
+                }else{
+                    $name = "df_image.png";
+                }
+
+                $userId = User::insertGetId([
+                    'name' => request('name'),
+                    'email' => request('email'),
+                    'password' => Hash::make(request('password')),
+                    'user_role' => 22,
+                    'user_status' => 1,
+                    'last_login_time' => request('last_login_time'),
+                    'created_at' => Carbon::now(),
+                ]);
+
+                Admin::create([
+                    'user_id' => $userId,
+                    'gender' => request('gender'),
+                    'phone' => request('phone'),
+                    'birth_date' => request('birth_date'),
+                    'nat_id' => request('nat_id'),
+                    'active' => request('active'),
+                    'address' => request('address'),
+                    'notes' => request('notes'),
+                    'image' => $name
+
+                ]);
+            });
+            // end db transaction to store 
+
         }
     }
 
@@ -219,7 +225,7 @@ class UsersController extends Controller
         return DataTables::of($all)
             ->addColumn('image', function($res){
                 return '
-                    <a class="spotlight" href="'.url('back/images/users/'.$res['image']).'">
+                    <a class="spotlight" title="'.$res['name'].'" href="'.url('back/images/users/'.$res['image']).'">
                         <img src="'.url('back/images/users/'.$res['image']).'" alt="'.$res['text'].'" style="width: 25px;height: 25px;border-radius: 5px;margin: 0px auto;display: block;">
                     </a>
                 ';

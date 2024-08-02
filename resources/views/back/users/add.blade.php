@@ -37,6 +37,11 @@
                     document.querySelector('.modal #save').disabled = false;
                     document.querySelector('.spinner_request').style.display = 'none';
 
+                    // $("#file_upload .heading_title").text('Choose file...');
+                    // $("#file_upload #custom-file-container__image-preview").html(`
+                    //     <div class="custom-file-container__image-preview" style="position: relative;top: -48px;"></div>
+                    // `);
+
                     alertify.set('notifier','position', 'top-center');
                     alertify.set('notifier','delay', 3);
                     alertify.success("تمت الإضافة بنجاح");
