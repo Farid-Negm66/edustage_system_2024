@@ -66,20 +66,9 @@ class UsersController extends Controller
             ]);            
 
 
-
-            // if ($request->hasFile('image')) {
-            //     $file = $request->file('image');
-            //     $name = time() . '.' .$file->getClientOriginalExtension();
-            //     $image_resize = Image::make($file->getRealPath());
-            //     $image_resize->resize(300, 300);
-            //     $path = public_path('back/images/users');
-            //     $image_resize->save(public_path('back/images/users/' . $name));
-            // }else{
-            //     $name = "df_image.png";
-            // }
-
             // start db transaction to store 
             DB::transaction(function(){
+
                 if(request()->hasFile('image')){
                     $file = request('image');
                     $name = time() . '.' .$file->getClientOriginalExtension();
@@ -113,15 +102,19 @@ class UsersController extends Controller
                 ]);
             });
             // end db transaction to store 
-
         }
     }
 
     public function edit($id)
     {
         if (request()->ajax()){
-            $find = User::where('id', $id)->first();
-            return response()->json($find);
+            $user = User::where('id', $id)->first();
+            $userInAdminTable = Admin::where('user_id', $id)->first();
+            
+            return response()->json([
+                'user' => $user,
+                'userInAdminTable' => $userInAdminTable
+            ]);
         }
         return response()->json(['failed' => 'Access Denied']);
     }

@@ -166,6 +166,12 @@
         .spl-title{
             text-align: center !important;
         }
+
+        #example1_processing{
+            padding: 10px 10px 35px !important;
+            border: 2px solid red !important;
+            color: red !important;
+        }
         /* ////////////////////////////////////////////  top css new css edit  ///////////////////////////////////////////////// */
 
 

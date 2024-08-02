@@ -11,13 +11,24 @@
                 $(".dataInput").val('');
             },
             success: function(res){
-                $.each(res , function(index, value){                    
-                    $(`.modal form #${index}`).val(value);
-                });
+                // user
+                $(`.modal form #name`).val(res.user.name);
+                $(`.modal form #email`).val(res.user.email);
+                $(`.modal form #user_role`).val(res.user.user_role);
+                
+                // userInAdminTable
+                $(`.modal form #gender`).val(res.userInAdminTable.gender);
+                $(`.modal form #phone`).val(res.userInAdminTable.phone);
+                $(`.modal form #birth_date`).val(res.userInAdminTable.birth_date);
+                $(`.modal form #nat_id`).val(res.userInAdminTable.nat_id);
+                $(`.modal form #active`).val(res.userInAdminTable.active);
+                $(`.modal form #address`).val(res.userInAdminTable.address);
+                $(`.modal form #notes`).val(res.userInAdminTable.notes);
+                $(`.modal form #image_preview_form`).attr('src', `{{ url('back/images/users') }}/${res.userInAdminTable.image}`);
 
                 document.querySelector("#res_id").value = res_id;
                 document.querySelector("#image_hidden").value = res.image;
-                document.querySelector("#image_preview_form").src = `{{ url('back/images/users') }}/${res.image}`;
+                document.querySelector("#image_preview_form").src = `{{ url('back/images/users') }}/${res.userInAdminTable.image}`;
                 
                 alertify.set('notifier','position', 'top-center');
                 alertify.set('notifier','delay', 2);

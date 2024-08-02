@@ -35,6 +35,12 @@
     <script> new FileUploadWithPreview('file_upload') </script>
 
     <script>
+        flatpickr(".datePicker", {
+            
+        });
+    </script>
+
+    <script>
         // open modal when click button (insert)
         document.addEventListener('keydown', function(event){
             if( event.which === 45 ){
@@ -65,6 +71,22 @@
         });
 
 
+        // show password or hide
+        $('.show_pass').click(function(){
+            const password = $("#password");
+            const confirmed_password = $("#confirmed_password");
+           
+            if(password.attr('type') == 'password' || confirmed_password.attr('type') == 'password'){
+                password.attr('type', 'text');
+                confirmed_password.attr('type', 'text');
+                $('i.fa.fa-eye').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+
+            }else if(password.attr('type') == 'text' || confirmed_password.attr('type') == 'text'){
+                password.attr('type', 'password');
+                confirmed_password.attr('type', 'password');
+                $('i.fa.fa-eye-slash').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+            }
+        })
 
         // datatable
         $(document).ready(function () {

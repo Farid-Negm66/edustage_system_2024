@@ -36,8 +36,9 @@
                         <div class="col-md-3 col-xs-12">
                             <label for="password">كلمة المرور</label>
                             <i class="fas fa-star require_input"></i>
-                            <div>
+                            <div style="position: relative;">
                                 <input type="password" class="form-control dataInput" placeholder="كلمة المرور" id="password" name="password">
+                                <i class="fa fa-eye show_pass" style="position: absolute;top: 14px;left: 10px;font-size: 16px;cursor: pointer;"></i>
                             </div>
                             <bold class="text-danger" id="errors-password" style="display: none;"></bold>
                         </div>
@@ -45,8 +46,9 @@
                         <div class="col-md-3 col-xs-12">
                             <label for="confirmed_password">تاكيد كلمة المرور</label>
                             <i class="fas fa-star require_input"></i>
-                            <div>
+                            <div style="position: relative;">
                                 <input type="password" class="form-control dataInput" placeholder="تاكيد كلمة المرور" id="confirmed_password" name="confirmed_password">
+                                <i class="fa fa-eye show_pass" style="position: absolute;top: 14px;left: 10px;font-size: 16px;cursor: pointer;"></i>
                             </div>
                             <bold class="text-danger" id="errors-confirmed_password" style="display: none;"></bold>
                         </div>
@@ -73,7 +75,7 @@
                         <div class="col-lg-2 col-md-3 col-xs-12">
                             <label for="birth_date">تاريخ الميلاد</label>
                             <div>    
-                                <input type="date" class="form-control dataInput" id="birth_date" name="birth_date">
+                                <input type="text" class="form-control dataInput datePicker" id="birth_date" name="birth_date" placeholder="{{ date('Y-m-d') }}">
                             </div>
                             <bold class="text-danger" id="errors-birth_date" style="display: none;"></bold>
                         </div>
@@ -103,7 +105,8 @@
                             <div>
                                 <select id="user_role" name="user_role"  class="form-control dataInput">
                                     <option value="" selected disabled>---</option>
-                                    <option value="1">admin</option>
+                                    <option value="22">admin</option>
+                                    <option value="20">stuff</option>
                                 </select>
                             </div>
                             <bold class="text-danger" id="errors-user_role" style="display: none;"></bold>
@@ -151,7 +154,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-xs-12">
                             <img id="image_preview_form" class="img-responsive img-thumbnail" src="{{ url('back/images/users/df_image.png') }}" />
                         </div>
                     </div>
