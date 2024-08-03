@@ -120,29 +120,21 @@ class UsersController extends Controller
     }
 
     public function update(Request $request, $id)
-    {
-        if (request()->ajax()){
-            $find = User::where('id', $id)->first();
+    {   
+        $user = User::where('id', $id)->first();
+        $userInAdminTable = Admin::where('user_id', $id)->first();
 
+        if (request()->ajax()){            
             $this->validate($request , [
-                'name' => 'required|string',
+                'name' => 'required|string|max:250|unique:users,name,'.$id,
                 'email' => 'required|unique:users,email,'.$id,
                 'birth_date' => 'nullable|date' ,
-                'phone' => 'required|numeric',
-                'address' => 'required|string',
-                'nat_id' => 'nullable|min:14|numeric|unique:users,nat_id,'.$id,    
+                'phone' => 'nullable|numeric|unique:admins,phone,'.$userInAdminTable['id'],
+                'nat_id' => 'nullable|min:14|numeric|unique:admins,nat_id,'.$userInAdminTable['id'],    
                 'password' => 'nullable|min:6',
                 'confirmed_password' => 'nullable|min:6|same:password',
-                'role' => 'required',
+                'user_role' => 'required',
                 'image' => 'nullable|mimes:jpeg,jpg,png,gif|max:1500',
-
-                // 'confirmed_password' => [
-                //     'required',
-                //     'same:password',
-                    // Password::min(8)
-                    //         ->numbers()
-                    //         ->symbols()
-                // ],
             ],[
                 'required' => ':attribute مطلوب.',
                 'string' => ':attribute غير صحيح.',
@@ -153,52 +145,61 @@ class UsersController extends Controller
                 'min' => ':attribute أقل من القيمة المطلوبة.',
                 'same' => ':attribute غير مطابقة مع كلمة المرور.',
                 'mimes' => ':attribute يجب أن تكون من نوع JPG أو PNG أو JPEG أو GIF.',
-                'max' => ':attribute حجمها كبير.'
-                // 'numbers' => ':attribute القيمة المطلوبة رقم.',
-                // 'symbols' => ':attribute القيمة المطلوبة رموز.',
+                'max' => ':attribute حجمها كبير.',
             ],[
                 'name' => 'إسم المستخدم',
                 'email' => 'البريد الإلكتروني',
                 'birth_date' => 'تاريخ الميلاد',
                 'phone' => 'التليفون',
-                'role' => 'تراخيص المستخدم',
+                'user_role' => 'تراخيص المستخدم',
                 'address' => 'العنوان',
                 'nat_id' => 'الرقم القومي',
                 'password' => 'كلمة المرور',
-                'confirmed_password' => 'تأكيد كلمة المرور',                
-                'image' => 'الصورة',                
+                'confirmed_password' => 'تأكيد كلمة المرور',         
+                'image' => 'صورة المستخدم',                
+       
             ]);
 
 
+            // start db transaction to store 
+            DB::transaction(function() use ($user, $userInAdminTable){
 
-            if(request('image') == ""){
-                $name = request("image_hidden");
-            }else{
-                $file = request('image');
-                $name = time() . '.' .$file->getClientOriginalExtension();
-                $path = public_path('back/images/users');
-                $file->move($path , $name);
-                
-                if(request("image_hidden") != "df_image.png"){
-                    File::delete(public_path('back/images/users/'.$find['image']));
+                if(request('image') == ""){
+                    $name = request("image_hidden");
+                }else{
+                    $file = request('image');
+                    $name = time() . '.' .$file->getClientOriginalExtension();
+                    $path = public_path('back/images/users');
+                    $file->move($path , $name);
+                    
+                    if(request("image_hidden") != "df_image.png"){
+                        File::delete(public_path('back/images/users/'.$userInAdminTable['image']));
+                    }
                 }
-            }
-
-            $find->update([
-                'name' => request('name'),
-                'email' => request('email'),
-                'password' => request('password') == null ? $find['password'] : Hash::make(request('password')),
-                'phone' => request('phone'),
-                'role' => request('role'),
-                'address' => request('address'),
-                'nat_id' => request('nat_id'),
-                'birth_date' => request('birth_date'),
-                'image' => $name,
-                'gender' => request('gender'),
-                'status' => request('status'),
-                'last_login_time' => request('last_login_time'),
-                'note' => request('note')
-            ]);
+    
+                $user->update([
+                    'name' => request('name'),
+                    'email' => request('email'),
+                    'password' => request('password') == null ? $user['password'] : Hash::make(request('password')),
+                    'user_role' => 22,
+                    'user_status' => 1,
+                    'last_login_time' => request('last_login_time'),
+                    'updated_at' => Carbon::now(),
+                ]);
+    
+                $userInAdminTable->update([
+                    'gender' => request('gender'),
+                    'phone' => request('phone'),
+                    'birth_date' => request('birth_date'),
+                    'nat_id' => request('nat_id'),
+                    'active' => request('active'),
+                    'address' => request('address'),
+                    'notes' => request('notes'),
+                    'image' => $name
+                ]);
+              
+            });
+            // end db transaction to store 
         }
     }
 

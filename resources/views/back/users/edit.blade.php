@@ -2,6 +2,7 @@
     ///////////////////////////////// edit /////////////////////////////////
     $(document).on("click" , "#example1 tr .edit" ,function(){
         const res_id = $(this).attr("res_id");
+        var birth_date = flatpickr(".datePicker");
 
         $.ajax({
             url: `{{ url($pageNameEn) }}/edit/${res_id}`,
@@ -19,15 +20,16 @@
                 // userInAdminTable
                 $(`.modal form #gender`).val(res.userInAdminTable.gender);
                 $(`.modal form #phone`).val(res.userInAdminTable.phone);
-                $(`.modal form #birth_date`).val(res.userInAdminTable.birth_date);
                 $(`.modal form #nat_id`).val(res.userInAdminTable.nat_id);
                 $(`.modal form #active`).val(res.userInAdminTable.active);
                 $(`.modal form #address`).val(res.userInAdminTable.address);
                 $(`.modal form #notes`).val(res.userInAdminTable.notes);
                 $(`.modal form #image_preview_form`).attr('src', `{{ url('back/images/users') }}/${res.userInAdminTable.image}`);
 
-                document.querySelector("#res_id").value = res_id;
-                document.querySelector("#image_hidden").value = res.image;
+                birth_date.setDate(res.userInAdminTable.birth_date, true); 
+
+                document.querySelector("#res_id").value = res.user.id;
+                document.querySelector("#image_hidden").value = res.userInAdminTable.image;
                 document.querySelector("#image_preview_form").src = `{{ url('back/images/users') }}/${res.userInAdminTable.image}`;
                 
                 alertify.set('notifier','position', 'top-center');

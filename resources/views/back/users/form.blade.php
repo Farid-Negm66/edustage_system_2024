@@ -75,7 +75,7 @@
                         <div class="col-lg-2 col-md-3 col-xs-12">
                             <label for="birth_date">تاريخ الميلاد</label>
                             <div>    
-                                <input type="text" class="form-control dataInput datePicker" id="birth_date" name="birth_date" placeholder="{{ date('Y-m-d') }}">
+                                <input type="text" class="form-control dataInput datePicker" id="birth_date" name="birth_date" placeholder="تاريخ الميلاد">
                             </div>
                             <bold class="text-danger" id="errors-birth_date" style="display: none;"></bold>
                         </div>
