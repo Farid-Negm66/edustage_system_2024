@@ -32,7 +32,10 @@
 		<!-- Dark-mode css -->
 		<link href="{{ asset('back') }}/assets/css-rtl/style-dark.css" rel="stylesheet">
 
-        
+		{{-- alertify --}}
+		<link href="{{ asset('back/assets/css-rtl/alertify.rtl.min.css') }}" type="text/css" rel="stylesheet"/>
+		<link href="{{ asset('back/assets/css-rtl/default.rtl.min.css') }}" type="text/css" rel="stylesheet"/>
+
 		<!---Skinmodes css-->
 		<link href="{{ asset('back') }}/assets/css-rtl/skin-modes.css" rel="stylesheet" />
 
@@ -52,6 +55,10 @@
 				/* font-family: "4_F4", serif; */
 				font-family: Almarai;
 				
+			}
+			.ajs-error{
+				background: #c40707 !important;
+				width: 400px !important;
 			}
 
 		</style>
@@ -89,15 +96,17 @@
 													<div class="main-signup-header">
 														<h2 style="font-size: 23px;">مرحباً بك مرة أخرى!</h2>
 														<h5 class="font-weight-semibold mb-4" style="font-size: 17px;">يرجى تسجيل الدخول للمتابعة.</h5>
-														<form action="#">
+														<form action="{{ url('login_post') }}" method="POST">
+															@csrf
+
 															<div class="form-group">
-																<label>البريد الإلكتروني</label> 
-																<input class="form-control" placeholder="البريد الإلكتروني" type="text">
+																<label for="email">البريد الإلكتروني</label> 
+																<input class="form-control" placeholder="البريد الإلكتروني" type="email" name="email" id="email" value="{{ old('email') }}">
 															</div>
 															
 															<div class="form-group">
-																<label>الرقم السري</label> 
-																<input class="form-control" placeholder="الرقم السري" type="password">
+																<label for="password">الرقم السري</label> 
+																<input class="form-control" placeholder="الرقم السري" type="password" name="password" id="password">
 															</div>
 															
 															<div class="form-group">
@@ -169,12 +178,43 @@
 		<script src="{{ asset('back') }}/assets/plugins/rating/jquery.rating-stars.js"></script>
 		<script src="{{ asset('back') }}/assets/plugins/rating/jquery.barrating.js"></script>
 
-        
+		<!-- alertify -->
+		<script src="{{ asset('back/assets/js/alertify.min.js') }}"></script>
+
 		<!-- custom js -->
 		<script src="{{ asset('back') }}/assets/js/custom.js"></script>
 
 		<!-- Switcher js -->
 		<script src="{{ asset('back') }}/assets/switcher/js/switcher-rtl.js"></script>
+
+		<script>    
+			// check if user not register login
+			if(@json(session()->has('error_auth'))){
+				alertify.set('notifier','position', 'top-center');
+				alertify.set('notifier','delay', 5);
+				alertify.error(`<div class="text-center" style="color: #fff;font-weight: bold;">${@json(session()->get('error_auth'))}</div>`);
+			}
+	
+			// check if user email or password error
+			if(@json(session()->has('error_email_or_password'))){
+				alertify.set('notifier','position', 'top-center');
+				alertify.set('notifier','delay', 5);
+				alertify.error(`<div class="text-center" style="color: #fff;font-weight: bold;">${@json(session()->get('error_email_or_password'))}</div>`);
+			}
+			@json(session()->forget('error_email_or_password'));
+	
+			// check if user not register email or password
+			var countErrors = @json(count($errors) > 0);
+			var errorMessages = @json($errors->all());
+	
+			if (countErrors) {
+				$.each(errorMessages, function(index, message) {
+					alertify.set('notifier','position', 'top-center');
+					alertify.set('notifier','delay', 5);
+					alertify.error(`<div class="text-center" style="color: #fff;font-weight: bold;">${message}</div>`);
+				});
+			}
+		</script>
 
     </body>
 

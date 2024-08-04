@@ -72,7 +72,7 @@
                             <bold class="text-danger" id="errors-phone" style="display: none;"></bold>
                         </div>   
                         
-                        <div class="col-lg-2 col-md-3 col-xs-12">
+                        <div class="col-lg-1 col-md-3 col-xs-12">
                             <label for="birth_date">تاريخ الميلاد</label>
                             <div>    
                                 <input type="text" class="form-control dataInput datePicker" id="birth_date" name="birth_date" placeholder="تاريخ الميلاد">
@@ -80,7 +80,7 @@
                             <bold class="text-danger" id="errors-birth_date" style="display: none;"></bold>
                         </div>
 
-                        <div class="col-lg-2 col-md-3 col-xs-12">
+                        <div class="col-lg-1 col-md-3 col-xs-12">
                             <label for="nat_id">الرقم القومي</label>
                             <div>    
                                 <input type="number" class="form-control dataInput" placeholder="الرقم القومي" id="nat_id" name="nat_id">
@@ -99,6 +99,20 @@
                             <bold class="text-danger" id="errors-active" style="display: none;"></bold>
                         </div>
 
+                        <div class="col-lg-2 col-md-3 col-xs-12">
+                            <label for="user_status">حالة المستخدم</label>
+                            <i class="fas fa-star require_input"></i>
+                            <div>
+                                <select id="user_status" name="user_status"  class="form-control dataInput">
+                                    <option value="" selected disabled>---</option>
+                                    <option value="1">أدمن</option>
+                                    <option value="2">موظف</option>
+                                    <option value="4">مدرس</option>
+                                </select>
+                            </div>
+                            <bold class="text-danger" id="errors-user_status" style="display: none;"></bold>
+                        </div>  
+                        
                         <div class="col-lg-2 col-md-3 col-xs-12">
                             <label for="user_role">التراخيص </label>
                             <i class="fas fa-star require_input"></i>

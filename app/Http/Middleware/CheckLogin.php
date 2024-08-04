@@ -19,14 +19,13 @@ class CheckLogin
     {
 
         if(Auth::user()){
-            if (Auth::user()->status){
+            // if (Auth::user()->status){
+            if (Auth::check() && Auth::user()->user_status == 1 || Auth::user()->user_status == 2 || Auth::user()->user_status == 3 || Auth::user()->user_status == 4){
                 return $next($request);
-            }
-            else{
+            }else{
                 return redirect('/login')->with("error_auth", "تم تعطيل حسابك الرجاء مراجعة مسؤول النظام");
             }
-        }
-        else{
+        }else{
             return redirect('/login')->with("error_auth", "قم بتسجيل الايميل والباسورد للدخول علي النظام");
         }
     }

@@ -9,7 +9,15 @@
 @endsection
 
 @section('footer')
-	
+	@if (session()->has('success_login'))
+		<script>
+			$(document).ready(function () {
+				alertify.set('notifier','position', 'top-center');
+				alertify.set('notifier','delay', 4);
+				alertify.success("مرحبا ( {{ auth()->user()->name }} )");
+			});
+		</script>
+	@endif
 @endsection
 
 @section('content')

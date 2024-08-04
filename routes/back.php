@@ -33,7 +33,7 @@ Route::fallback(function () {
 });
 
 // , 'middleware' => 'checkLogin' , 'middleware' => 'throttle'
-Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Back'], function(){
+Route::group(['prefix' => '/', 'namespace' => 'App\Http\Controllers\Back', 'middleware' => 'checkLogin'], function(){
 
     Route::get('/', 'HomeController@index');
 
