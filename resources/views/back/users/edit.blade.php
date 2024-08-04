@@ -16,16 +16,16 @@
                 $(`.modal form #name`).val(res.user.name);
                 $(`.modal form #email`).val(res.user.email);
                 $(`.modal form #user_role`).val(res.user.user_role);
+                $(`.modal form #user_status`).val(res.user.user_status);
+                $(`.modal form #active`).val(res.user.active);
                 
                 // userInAdminTable
                 $(`.modal form #gender`).val(res.userInAdminTable.gender);
                 $(`.modal form #phone`).val(res.userInAdminTable.phone);
                 $(`.modal form #nat_id`).val(res.userInAdminTable.nat_id);
-                $(`.modal form #active`).val(res.userInAdminTable.active);
                 $(`.modal form #address`).val(res.userInAdminTable.address);
                 $(`.modal form #notes`).val(res.userInAdminTable.notes);
                 $(`.modal form #image_preview_form`).attr('src', `{{ url('back/images/users') }}/${res.userInAdminTable.image}`);
-
                 birth_date.setDate(res.userInAdminTable.birth_date, true); 
 
                 document.querySelector("#res_id").value = res.user.id;
@@ -74,6 +74,7 @@
                 alertify.error("هناك شيئ ما خطأ");
             },
             success: function(res){
+
                 $('#example1').DataTable().ajax.reload( null, false );
                 $(".modal form bold[class=text-danger]").css('display', 'none');
         
@@ -88,6 +89,7 @@
                 alertify.set('notifier','position', 'top-center');
                 alertify.set('notifier','delay', 3);
                 alertify.success("تم التعديل بنجاح");
+
             }
         });
     });

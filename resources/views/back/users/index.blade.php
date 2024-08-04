@@ -103,6 +103,7 @@
                     {data: 'gender', name: 'gender'},
                     {data: 'phone', name: 'phone'},
                     {data: 'user_role', name: 'user_role'},
+                    {data: 'user_status', name: 'user_status'},
                     {data: 'status', name: 'status'},
                     {data: 'action', name: 'action', orderable: false},
                 ],
@@ -157,6 +158,7 @@
                                         <th class="wd-20p border-bottom-0">النوع</th>
                                         <th class="wd-15p border-bottom-0">موبايل</th>
                                         <th class="wd-15p border-bottom-0">التراخيص</th>
+                                        <th class="wd-15p border-bottom-0" style="width: 15%;">ن المستخدم</th>
                                         <th class="wd-10p border-bottom-0">الحالة</th>
                                         <th class="wd-25p border-bottom-0">التحكم</th>
                                     </tr>

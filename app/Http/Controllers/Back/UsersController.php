@@ -9,6 +9,7 @@ use App\Models\Back\RolesPermissions;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -19,7 +20,8 @@ use Illuminate\Support\Facades\DB;
 class UsersController extends Controller
 {
     public function index()
-    {    
+    {   
+        // dd();
         $pageNameAr = 'المستخدمين';
         $pageNameEn = 'users';
         // $permissions = RolesPermissions::all();
@@ -39,6 +41,7 @@ class UsersController extends Controller
                 'password' => 'required|min:6',
                 'confirmed_password' => 'required|min:6|same:password',
                 'user_role' => 'required',
+                'user_status' => 'required',
                 'image' => 'nullable|mimes:jpeg,jpg,png,gif|max:1500',
             ],[
                 'required' => ':attribute مطلوب.',
@@ -57,6 +60,7 @@ class UsersController extends Controller
                 'birth_date' => 'تاريخ الميلاد',
                 'phone' => 'التليفون',
                 'user_role' => 'تراخيص المستخدم',
+                'user_status' => 'حالة المستخدم',
                 'address' => 'العنوان',
                 'nat_id' => 'الرقم القومي',
                 'password' => 'كلمة المرور',
@@ -83,8 +87,8 @@ class UsersController extends Controller
                     'email' => request('email'),
                     'password' => Hash::make(request('password')),
                     'user_role' => 22,
-                    'user_status' => 1,
-                    'last_login_time' => request('last_login_time'),
+                    'user_status' => request('user_status'),
+                    'active' => request('active'),
                     'created_at' => Carbon::now(),
                 ]);
 
@@ -94,7 +98,6 @@ class UsersController extends Controller
                     'phone' => request('phone'),
                     'birth_date' => request('birth_date'),
                     'nat_id' => request('nat_id'),
-                    'active' => request('active'),
                     'address' => request('address'),
                     'notes' => request('notes'),
                     'image' => $name
@@ -134,6 +137,7 @@ class UsersController extends Controller
                 'password' => 'nullable|min:6',
                 'confirmed_password' => 'nullable|min:6|same:password',
                 'user_role' => 'required',
+                'user_status' => 'required',
                 'image' => 'nullable|mimes:jpeg,jpg,png,gif|max:1500',
             ],[
                 'required' => ':attribute مطلوب.',
@@ -152,6 +156,7 @@ class UsersController extends Controller
                 'birth_date' => 'تاريخ الميلاد',
                 'phone' => 'التليفون',
                 'user_role' => 'تراخيص المستخدم',
+                'user_status' => 'حالة المستخدم',
                 'address' => 'العنوان',
                 'nat_id' => 'الرقم القومي',
                 'password' => 'كلمة المرور',
@@ -162,7 +167,7 @@ class UsersController extends Controller
 
 
             // start db transaction to store 
-            DB::transaction(function() use ($user, $userInAdminTable){
+            DB::transaction(function() use ($user, $userInAdminTable, $id){
 
                 if(request('image') == ""){
                     $name = request("image_hidden");
@@ -182,8 +187,8 @@ class UsersController extends Controller
                     'email' => request('email'),
                     'password' => request('password') == null ? $user['password'] : Hash::make(request('password')),
                     'user_role' => 22,
-                    'user_status' => 1,
-                    'last_login_time' => request('last_login_time'),
+                    'user_status' => request('user_status'),
+                    'active' => request('active'),
                     'updated_at' => Carbon::now(),
                 ]);
     
@@ -192,14 +197,25 @@ class UsersController extends Controller
                     'phone' => request('phone'),
                     'birth_date' => request('birth_date'),
                     'nat_id' => request('nat_id'),
-                    'active' => request('active'),
                     'address' => request('address'),
                     'notes' => request('notes'),
                     'image' => $name
                 ]);
-              
+                    
+
+
+
+                // check if change auth()->user() active column
+                // if(auth()->id() == $id){
+                //     if(request('active') != $user['active']){
+                //         auth()->user()->tokens()->delete();
+                //         Auth::logout();
+                //         return redirect('/login');
+                //     }
+                // }
+                
             });
-            // end db transaction to store 
+            // end db transaction to store             
         }
     }
 
@@ -211,8 +227,8 @@ class UsersController extends Controller
         $all = User::where('user_status', 1)
                     ->leftJoin('admins', 'admins.user_id', 'users.id')
                     ->select(
-                        'users.id', 'users.name', 'users.email', 'users.user_status', 'users.user_role',
-                        'admins.gender', 'admins.phone', 'admins.birth_date', 'admins.image', 'admins.active', 'admins.address', 'admins.notes'
+                        'users.id', 'users.name', 'users.email', 'users.user_status', 'users.user_role', 'users.active',
+                        'admins.gender', 'admins.phone', 'admins.birth_date', 'admins.image', 'admins.address', 'admins.notes'
                     )
                     ->orWhere('users.user_status', 2)
                     ->get();
@@ -227,9 +243,19 @@ class UsersController extends Controller
             ->addColumn('status', function($res){
                 if($res->active == 1){
                     return '<span class="label text-success" style="position: relative;"><div class="dot-label bg-success ml-1" style="position: absolute;right: -17px;top: 7px;"></div>نشط</span>';
-                }
-                else{
+                }else{
                     return '<span class="label text-danger" style="position: relative;"><div class="dot-label bg-danger ml-1" style="position: absolute;right: -15px;top: 7px;"></div>معطل</span>';
+                }
+            })
+            ->addColumn('user_status', function($res){
+                if($res->user_status == 1){
+                    return '<span class="badge badge-success" style="width: 40px;">مدير</span>';
+                }else if($res->user_status == 2){
+                    return '<span class="badge badge-primary" style="width: 40px;">موظف</span>';
+                }else if($res->user_status == 4){
+                    return '<span class="badge badge-danger" style="width: 40px;">مدرس</span>';
+                }else{
+                    return '<span class="badge badge-warning" style="width: 40px;">أخري</span>';
                 }
             })
             ->addColumn('gender', function($res){
@@ -253,7 +279,7 @@ class UsersController extends Controller
                 // </button>
 
             })
-            ->rawColumns(['image', 'status', 'gender', 'action'])
+            ->rawColumns(['image', 'status', 'user_status', 'gender', 'action'])
             ->toJson();
     }
 

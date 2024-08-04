@@ -10,11 +10,21 @@
 					<div class="app-sidebar__user clearfix">
 						<div class="dropdown user-pro-body">
 							{{-- <div class="">
-								<img alt="user-img" class="avatar avatar-xl brround" src="{{ asset('back') }}/assets/img/faces/6.jpg"><span class="avatar-status profile-status bg-green"></span>
+								<img alt="user-img" class="avatar brround" src="{{ asset('back') }}/assets/img/faces/6.jpg"><span class="avatar-status profile-status bg-green"></span>
 							</div> --}}
 							<div class="user-info">
-								<h4 class="font-weight-semibold mt-3 mb-0">Petey Cruiser</h4>
-								<span class="mb-0 text-muted">Premium Member</span>
+								<img alt="user-img" class="avatar brround" src="{{ asset('back') }}/images/users/{{ $userInfoFromAdminTable->image }}" style="display: inline;">
+								<h4 class="font-weight-bold mt-3 mb-0" style="display: inline;position: relative;top: 2px;right: 4px;text-decoration: underline;color: #065fda;">{{ auth()->user()->name }}</h4>
+								<br>
+								{{-- <span class="mb-0 text-muted">
+									@if (auth()->user()->user_status == 1)
+										مدير
+									@elseif (auth()->user()->user_status == 2)
+										موظف
+									@elseif (auth()->user()->user_status == 4)
+										مدرس
+									@endif
+								</span> --}}
 							</div>
 						</div>
 					</div>
@@ -22,7 +32,11 @@
 						{{-- <li class="side-item side-item-category">إدارة علاقات العملاء</li> --}}
 						
 						<li class="slide">
-							<a class="side-menu__item" data-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M19 5H5v14h14V5zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" opacity=".3"/><path d="M3 5v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2zm2 0h14v14H5V5zm2 5h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg><span class="side-menu__label">إدارة علاقات العملاء</span><i class="angle fe fe-chevron-down"></i></a>
+							<a class="side-menu__item" data-toggle="slide" href="#">
+								<i class="fas fa-chart-pie sidebar_icon"></i>
+								<span class="side-menu__label">إدارة علاقات العملاء</span>
+								<i class="angle fe fe-chevron-down"></i>
+							</a>
 							<ul class="slide-menu">
 								<li><a class="slide-item" href="{{ url('back/crm_columns_names') }}">قسم جديد لإدارة العملاء</a></li>
 								<li><a class="slide-item" href="{{ url('back/crm_columns_values') }}">
@@ -33,7 +47,11 @@
 
 						{{-- <li class="side-item side-item-category">أولياء الأمور + الطلاب</li> --}}
 						<li class="slide">
-							<a class="side-menu__item" data-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z"/></svg><span class="side-menu__label">أولياء الأمور</span><i class="angle fe fe-chevron-down"></i></a>
+							<a class="side-menu__item" data-toggle="slide" href="#">
+								<i class="fas fa-user-tie sidebar_icon"></i>
+								<span class="side-menu__label">أولياء الأمور</span>
+								<i class="angle fe fe-chevron-down"></i>
+							</a>
 							<ul class="slide-menu">
 								<li><a class="slide-item" href="{{ url('parents') }}">جميع أولياء الأمور</a></li>
 								<li><a class="slide-item" href="{{ url('') }}">اضافة</a></li>
@@ -41,7 +59,11 @@
 						</li>
 
 						<li class="slide">
-							<a class="side-menu__item" data-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z"/></svg><span class="side-menu__label">الطلاب</span><i class="angle fe fe-chevron-down"></i></a>
+							<a class="side-menu__item" data-toggle="slide" href="#">
+								<i class="fas fa-graduation-cap sidebar_icon"></i>
+								<span class="side-menu__label">الطلاب</span>
+								<i class="angle fe fe-chevron-down"></i>
+							</a>
 							<ul class="slide-menu">
 								<li><a class="slide-item" href="{{ url('parents') }}">جميع الطلاب</a></li>
 								<li><a class="slide-item" href="{{ url('groups') }}">المجموعات التعليمية</a></li>
@@ -50,16 +72,25 @@
 
 						{{-- <li class="side-item side-item-category">جدول الحصص + الأوقات</li> --}}
 						<li class="slide">
-							<a class="side-menu__item" data-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z"/></svg><span class="side-menu__label">جدول الحصص</span><i class="angle fe fe-chevron-down"></i></a>
+							<a class="side-menu__item" data-toggle="slide" href="#">
+								<i class="fas fa-calendar-alt sidebar_icon"></i>
+								<span class="side-menu__label">جدول الحصص / الأوقات</span>
+								<i class="angle fe fe-chevron-down"></i>
+							</a>
 							<ul class="slide-menu">
 								<li><a class="slide-item" href="{{ url('time_table') }}">جدول الحصص</a></li>
+								<li><a class="slide-item" href="{{ url('times') }}">الأوقات</a></li>
 							</ul>
 						</li>
 						
 						<li class="slide">
-							<a class="side-menu__item" data-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M4 12c0 4.08 3.06 7.44 7 7.93V4.07C7.05 4.56 4 7.92 4 12z" opacity=".3"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93s3.05-7.44 7-7.93v15.86zm2-15.86c1.03.13 2 .45 2.87.93H13v-.93zM13 7h5.24c.25.31.48.65.68 1H13V7zm0 3h6.74c.08.33.15.66.19 1H13v-1zm0 9.93V19h2.87c-.87.48-1.84.8-2.87.93zM18.24 17H13v-1h5.92c-.2.35-.43.69-.68 1zm1.5-3H13v-1h6.93c-.04.34-.11.67-.19 1z"/></svg><span class="side-menu__label">الأوقات</span><i class="angle fe fe-chevron-down"></i></a>
+							<a class="side-menu__item" data-toggle="slide" href="#">
+								<i class="fas fa-users-cog sidebar_icon"></i>
+								<span class="side-menu__label">المستخدمين</span>
+								<i class="angle fe fe-chevron-down"></i>
+							</a>
 							<ul class="slide-menu">
-								<li><a class="slide-item" href="{{ url('times') }}">الأوقات</a></li>
+								<li><a class="slide-item" href="{{ url('users') }}">المستخدمين</a></li>
 							</ul>
 						</li>
 

@@ -172,6 +172,26 @@
             border: 2px solid red !important;
             color: red !important;
         }
+
+        .sidebar_icon{
+            position: relative;
+            bottom: 1px;
+            font-size: 20px;
+            margin-left: 3px;
+            color: grey !important;
+        }
+
+
+        .side-menu__item.active i, 
+        .side-menu__item:focus i, 
+        .side-menu__item:hover i{
+            color: #0162e8 !important;
+        }
+
+        .app-sidebar__user .user-pro-body{
+            padding: 10px 0 10px !important;
+        }
+
         /* ////////////////////////////////////////////  top css new css edit  ///////////////////////////////////////////////// */
 
 
@@ -262,7 +282,7 @@
 </head>
 
     <body class="main-body app sidebar-mini {{-- dark-theme --}}">
-    	
+    	@php  $userInfoFromAdminTable = App\Models\Back\Admin::where('user_id', auth()->user()->id)->first(); @endphp
         <!-- Start Switcher -->
         @include('back.layouts.switcher')
         <!-- End Switcher -->
